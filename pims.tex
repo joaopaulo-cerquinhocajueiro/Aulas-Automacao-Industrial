@@ -1,0 +1,73 @@
+%!TEX root = principal.tex
+\chapter{Gerenciamento da manufatura: PIMS e MES}
+
+ PIMS -- \emph{Process Information Management System} e MES -- \emph{Manufacturing Execution System} são sistemas da camada 3 da pirâmide de automação, responsáveis pelo armazenamento e tratamento de dados do nível 2, concentrando os dados de diversos processos separados em um único ponto. São os chamados \emph{middleware}, pois ficam a meio caminho entre os sistemas de gerenciamento de empresa e os supervisórios, às vezes combinando funções de um ou de outro.
+
+ De forma geral, no terceiro nível da pirâmide a preocupação é em consolidar os dados brutos do processo (\emph{data}), para com eles gerar informações  (\emph{information}) e conhecimento (\emph{knowledge}) sobre o processo, aumentando o valor destes valores, como mostra a figura \ref{fig:PIMS_conhecimento1}. Os dados são obtidos ou do controlador ou do supervisório de um determinado processo. A relação entre dados ou a variação destes dados no tempo geram informação sobre a planta. A relação entre informações ou a variação de informações no tempo geram conhecimento.
+\begin{figure}[htb]
+	\begin{center}
+	%	\includegraphics[angle=-90,width=0.8\textwidth]{PIMS_conhecimento1}
+		\begin{tikzpicture}
+		\draw[very thick, ->, >=stealth'](0,0)--(5.5,0);
+		\draw(5.5,0)node[below left]{Quantidade de dados};
+		\draw[very thick, ->, >=stealth'](0,0)--(0,3.3);
+		\draw(0,3.3)node[above left, rotate=90]{Valor};
+		\draw plot[smooth, tension=1.0] coordinates{(0.2,3.3) (2,1) (5.5,0.3)};
+		\draw(0.2,3.)node[right]{Conhecimento} (1.0,1.5)node[above right]{Informação} (4.3,0.4)node[above]{Dados brutos};
+	\end{tikzpicture}
+
+	\end{center}
+	\caption{Relação entre dados, informações e conhecimentos.}
+	\label{fig:PIMS_conhecimento1}
+\end{figure}
+
+Um exemplo desta relação é mostrado na figura \ref{fig:PIMS_conhecimento2}. Nesta figura, a partir dos dados de temperatura e vazão de um fluido é gerada a informação do calor removido em determinado trocador de calor. A comparação dos calores removidos de diversos trocadores gera o conhecimento de qual trocador é mais eficiente.
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[angle=-90,width=0.8\textwidth]{PIMS_conhecimento2}
+	\end{center}
+	\caption{Exemplo da transformação de dados para informação e de informação para conhecimento.}
+	\label{fig:PIMS_conhecimento2}
+\end{figure}
+
+\section{PIMS}
+	Para a finalidade de gerar informação e conhecimento, o ponto de partida é obter os dados brutos. Esta é a tarefa principal do PIMS: adquirir, armazenar e apresentar diversos dados de uma planta. O PIMS foi criado e ainda é principalmente usado para processos contínuos, tais como uma refinaria ou siderúrgica, e portanto tem um enfoque muito grande em variáveis analógicas e na relação delas com o tempo.
+
+	Do ponto de vista do PIMS podemos esquematizar os sistemas de uma fábrica como mostra a figura \ref{fig:PIMS}, onde se vê que o PIMS tem 4 partes principais: um
+	\begin{description}
+		\item[historiador de processos] que se comunica com vários sistemas do nível 1 (CLP, CNC) ou 2 (supervisório) ou ainda de outros sistemas nível 3, tais como um LIMS -- \emph{Laboratory Information Management System} ou MES para obter dados brutos dos diversos processos e acumula-os num
+		\item[banco de dados temporal], que armazena os dados indexando-os pelo tempo. Uma
+		\item[interface gráfica] faz a recuperação e visualização destes dados, que ainda podem ir para
+		\item[aplicações clientes] com variadas funções, desde análise dos dados a interface com outros sistemas.
+	\end{description}
+	\begin{figure}[hbt]
+		\begin{center}
+			\includegraphics[angle=-90,width=0.8\textwidth]{PIMS}
+		\end{center}
+		\caption{Sistema PIMS -- REFAZER.}
+		\label{fig:PIMS}
+	\end{figure}
+
+\subsection{Historiador de Processos}
+
+\subsection{Banco de Dados Temporal}
+
+\subsection{Interface Gráfica}
+
+\section{MES}
+Assim como o PIMS, um sistema MES também adquire dados do processo com o objetivo de apresentar uma visão geral do processo. Porém o MES tem uma função mais ativa que o PIMS, que é focado mais no armazenamento dos dados. Outra diferença importante é que os MES são usados principalmente em processos discretos, muitas vezes em sistemas de automação flexível ou programada, e tem que lidar com o sequenciamento dos processos, o que ocorre menos em sistemas contínuos.
+
+Os sistemas MES agregam diversas funções de sistemas anteriores mais simples e específicos e são definidos por terem 11 funções:
+\begin{description}
+	\item[Gerenciamento das definições de produto.] Tudo o que é necessário para a fabricação do produto. Isto inclue armazenamento, lista de materiais e insumos, set-points do processo e receitas.
+	\item[Gerenciamento de insumos.] Permite preparar e executar ordens de produção com garantia de disponibilidade dos insumos.
+	\item[Agendamento de produção.] Permite determinar a ordem que a produção será feita, para alcançar os requerimentos de produção definidos pela ERP (camada 4 da pirâmide) utilizando otimamente os recursos.
+	\item[Envio de ordens de produção.] Em função do agendamento feito, o MES cuida de enviar as ordens de produção para os diversos postos da planta.
+	\item[Acompanhamento da execução de ordens de produção.] Comunicação com sistemas níveis 1 e 2 para garantir a execução das ordens.
+	\item[Coleção dos dados de produção.] Equivalente ao historiador de processo do PIMS.
+	\item[Análise da performance da produção.] Cálculo dos chamados índices de produção -- \emph{KPI, Key Performance Indicators}. É a geração de informação útil a partir dos dados da produção.
+	\item[Rastreamento da produção.] Permite levantar que produto ou lote foi feito quando e em qual equipamento. Útil para melhoria da produção e imprescindível para remédios e produtos alimentícios.
+	\item[Armazenamento dos logs de produção.] Hoje em dia tais logs são inseridos pelo operador no próprio sistema supervisório e realcionados às variáveis de produção.
+	\item[Interface de auditoria.] Permite a análise dos diversos dados e informações armazenados e o cruzamento destes dados com outras bases de dados.
+\end{description}

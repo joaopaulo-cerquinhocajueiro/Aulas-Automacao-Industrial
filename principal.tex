@@ -1,0 +1,43 @@
+\documentclass[12pt,oneside]{report}
+\usepackage[a4paper]{geometry}
+%\usepackage{showkeys}
+\usepackage{listings}
+\lstset{
+language=C,
+basicstyle=\tiny\ttfamily}
+
+\usepackage{draftcopy}
+\draftcopyName{Joao Paulo}{180}
+\usepackage{joaopaulo}
+\title{Apostila de Automação Industrial}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\chapter{Sistemas de automação}
+\include{automacao}
+\include{pims}
+%\section{Gerenciamento da manufatura: MES}
+\section{Redes de Comunicação: Introdução e noções básicas}
+\chapter{SCADA -- Supervisory Control and Data Acquisition}
+\section{Arquitetura de sistemas SCADA e interfaceamento com níveis de automação}
+\section{Funcionalidades principais de sistemas SCADA}
+\chapter{Controladores Lógico-Programáveis (CLP)}
+\section{Programação - arduino}
+\section{Linguagem Ladder – Lógica Booleana}
+\section{Linguagem Ladder – Temporizadores}
+\section{Linguagem Ladder – Contadores}
+\section{Linguagem Ladder – Aplicações}
+\chapter{Linguagem Grafcet}
+\section{Linguagem Grafcet – Aplicações Parte 1}
+\section{Linguagem Grafcet – Aplicações Parte 2}
+\chapter{Instrumentação Industrial}
+\section{Medição de grandezas mecânicas. Características de instrumentos.}
+\section{Transmissão de dados, aterramento e blindagem em instrumentação.}
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
