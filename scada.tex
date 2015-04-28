@@ -1,0 +1,21 @@
+%!TEX root = principal.tex
+\section{SCADA}
+
+SCADA -- \emph{Supervisory Control And Data Acquisition}, são os sistemas do nível 2 da pirâmide de automação. Eles são a interface com os operadores com os sistemas de controle do nível 1. Suas funções são:
+
+\begin{description}
+\item[Supervisão], mostrando de forma prática o estado do processo.
+\item[Operação], substituindo os painéis de controle. Permite ligar e desligar os equipamentos, definir setpoints, etc.
+\item[Controle] de operações simples e que não tenham restrições temporais grandes.
+\end{description}
+
+Hoje em dia os sistemas SCADA também tem grande integração com os sistemas acima da pirâmide, e são responsáveis por fornecer dados a estes sistemas e receber informações adicionais, tais como setpoints pré-fixados e receitas. Basicamente o SCADA serve como interface principal dos usuários com os sistemas de automação.
+
+Tipicamente, um sistema SCADA possui:
+\begin{description}
+	\item[Sinóticos] - Telas representativas do processo.
+	\item[Alarmes] - Seja definidos no próprio SCADA seja definidos num elemento de controle (que é o mais comum).
+	\item[Gráficos de tendência] - Mostram a variação de variáveis do processo ao longo do tempo.
+	\item[Gerador de relatórios] - tipicamente contendo os alarmes e eventos de um determinado período e vários gráficos de tendência. Podem ser gerados devido a uma condição de alarme.
+\end{description}
+

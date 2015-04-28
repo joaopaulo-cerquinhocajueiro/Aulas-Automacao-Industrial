@@ -1,0 +1,246 @@
+%!TEX root = principal.tex
+\section{plcLib}
+
+A biblioteca plcLib (http://www.electronics-micros.com/software-hardware/plclib-arduino/) define um conjunto de funções muito parecidas com as da linguagem \emph{Instruction List}, e que podem ser facilmente transcritas para a linguagem Ladder. Na configuração padrão, chamada pela função \lstinline|setupPLC()| este sistema define 4 entradas (X0 a X3, usando A0 a A3) e quatro saídas (Y0 a Y3, usando 3, 5, 6 e 9).
+
+Usando o Multi-function Shield, as entradas correspondem ao potenciômetro (A0) e aos 3 botões, logo estão bem adequadas. As saídas correspondem ao buzzer (3) e a três conectores de servo, porém não temos nenhuma saída ligada aos leds. Para definir todas entradas e saídas de uma vez, fazemos:
+\begin{lstlisting}[caption=Definição de função e constantes para usar o o Multi-function Shield com o plcLib., label=lst:setupShield]
+// Definicao das constantes dos pinos
+const int VR = A0;
+const int S1 = A1;
+const int S2 = A2;
+const int S3 = A3;
+const int D1 = 13;
+const int D2 = 12;
+const int D3 = 11;
+const int D4 = 10;
+const int LS1 = 3;
+const int Q1 = 5; 
+const int Q2 = 6; 
+const int Q3 = 9; 
+const int Q4 = A5; 
+ 
+void setupShield(){ // Funcao para inicializar
+   pinMode(VR,INPUT);
+   pinMode(S1,INPUT);
+   pinMode(S2,INPUT);
+   pinMode(S3,INPUT);
+   pinMode(D1, OUTPUT);
+   pinMode(D2, OUTPUT);
+   pinMode(D3, OUTPUT);
+   pinMode(D4, OUTPUT);
+   pinMode(Q1, OUTPUT);
+   pinMode(Q2, OUTPUT);
+   pinMode(Q3, OUTPUT);
+   pinMode(Q4, OUTPUT);
+   pinMode(LS1, OUTPUT);
+   // Valores iniciais para apagar os leds e nao soar a buzina
+   digitalWrite(D1,HIGH); 
+   digitalWrite(D2,HIGH);
+   digitalWrite(D3,HIGH);
+   digitalWrite(D4,HIGH);
+   digitalWrite(LS1,HIGH);
+}
+\end{lstlisting}
+
+Deste modo basta chamarmos \lstinline|setupShield()| no setup que configuramos nossa entradas e saídas.
+
+\subsection{Acumulador}
+Os CLPs trabalham com o conceito de acumulador (que na implementação do plcLib tem o nome scanValue), que é uma variável implícita. As funções pegam implicitamente o valor a ser trabalhado do acumulador e salvam o resultado de volta nele.
+O plcLib define  as funções \lstinline|in(entrada)|, \lstinline|inNot(entrada)|, \lstinline|out(saida)| e \lstinline|outNot(saida)|, equivalentes às LD, LDN, ST e STN, de Instruction List, respectivamente. As duas primeiras pegam o valor de uma entrada e guardam no acumulador, enquanto que as 2 últimas pegam o valor do acumulador e colocam na saída. O Not (N) no final indica que estes valores são invertidos.
+Vejamos como exemplo o código \ref{lst:inOut}:
+\begin{lstlisting}[caption=Código simples de leitura de cópia de entradas para saídas., label=lst:inOut]
+void loop() {
+  in(S1);      // Le chave 1
+  out(D1);     // manda para led 1
+
+  inNot(S2);   // Le chave 2 (invertida)
+  out(D2);     // manda para led 2
+  
+  inNot(S3);   // Le chave 3 (invertida)
+  outNot(D3);  // manda para led 2 (invertido)
+}
+\end{lstlisting}
+
+Neste caso, D1 fica sendo uma cópia de S1, D2 o valor invertido de S2. Dá para imaginar o que acontece com D3.
+
+É bom lembrar que no multi-function shield as chaves são conectadas ao terra, enquanto que os leds são conectados à 5V. Isto faz com que quando apertada, a chave gere um 0 lógico (não um 1) e que o led acende quando se envia um 0 lógico (e não um 1). Por isto é interessante para trabalharmos com este shield fazermos inNot(Sn), que resulta em 1 se a chave estiver apertada, e outNot(Ln), que acende o led quando o valor no acumulador for 1.
+
+\subsection{Funções lógicas}
+Mas apenas carregar um único valor não é tão interessante. Bem mais útil é montar uma relação lógica entre valores. Para isto servem as funções andBit, orBit, xorBit, andNotBit e orNotBit. Cada uma desta funções faz uma operação lógica entre o acumulador e a variável indicada, salvando o resultado no acumulador. A tabela \ref{tab:logicas} mostra as tabelas verdades de cada uma delas.
+
+\begin{table}[h]
+\caption{Tabela verdade das funções lógicas definidas em plcLib.}\label{tab:logicas}
+\centering
+\begin{tabular}{|cc|ccccc|}
+%\usepackage{multirow}
+\hline
+\multirow{2}{*}{scanValue} & \multirow{2}{*}{ent} & \multicolumn{5}{|c|}{scanValue (após operação)} \\
+%\cline{3-7}
+ &  & andBit & orBit & xorBit & andNotBit & orNotBit\\
+ \hline
+0 & 0 & 0 & 0 & 0 & 0 & 1\\
+0 & 1 & 0 & 1 & 1 & 0 & 0\\
+1 & 0 & 0 & 1 & 1 & 1 & 1\\
+1 & 1 & 1 & 1 & 0 & 0 & 1\\
+\hline
+\end{tabular}
+\end{table}
+
+Colocando estas funções em cascata é possível criar lógicas bem interessantes, como por exemplo, soar o alarme se S1 ou S2 forem pressionados ao mesmo tempo que S3 for pressionado.
+\begin{lstlisting}[caption=Aciona a buzina em função das chaves., label=lst:buzina]
+  inNot(S1);   // Le se chave 1 apertada
+  orNotBit(S2);   // Le se chave 2 apertada e faz um OU logico
+  andNotBit(S3);  // Le se chave 3 apertada e faz um E logico
+  outNot(LS1);  // Se condicao satisfeita, aciona a buzina
+\end{lstlisting}
+
+O problema do uso do acumulador é que às vezes uma situação exige uma lógica mais complexa do que o acumulador permite. Por exemplo: como acender D2 se a maioria dos botões estiver pressionado? (Problema do voto majoritário)
+Existem 2 formas de resolver este problema: pilha ou variáveis;
+
+A pilha é como a maioria dos CLPs trabalham: ao invés de ter um único acumulador, ele tem um número finito de posições de memória que ele usa e todo comando usa implicitamente o topo da pilha. No caso da implementação do plcLib, a pilha pode ser definida separadamente como um objeto da classe Stack. Logo, se fizermos Stack pilha; definimos uma pilha de nome pilha.
+
+Os principais comandos de acesso à pilha são o \lstinline|push()|, que passam o valor do acumulador para o topo da pilha, e o \lstinline|pop()|, que tira o valor do topo da pilha e passa para o acumulador. Outros comandos úteis para a lógica são o \lstinline|andBlock()|, que faz o E do valor no topo da pilha com o acumulador, slavando no acumulador e o \lstinline|orBlock()|, que faz a mesma coisa com o OU lógico. Usando a pilha é possível resolver o problema da maioria dos botões da seguinte forma:
+
+\begin{lstlisting}[caption=Solução do voto majoritário com uso de pilha., label=lst:majPilha]
+void loop(){\lstinline|
+	inNot(S1);
+	andNotBit(S2);
+	andBit(S3);
+	pilha.push();
+	inNot(S1);
+	andBit(S2);
+	andNotBit(S3);
+	pilha.push();
+	in(S1);
+	andNotBit(S2);
+	andNotBit(S3);
+	pilha.push();
+	inNot(S1);
+	andNotBit(S2);
+	andNotBit(S3);
+	pilha.orBlock();
+	pilha.orBlock();
+	pilha.orBlock();
+	outNot(D2);
+}
+\end{lstlisting}
+
+Outra possibilidade é simplesmente definir variáveis auxiliares para receberem os valores intermediários. Neste caso as variáveis precisam ser do tipo \lstinline|unsigned int|.
+\begin{lstlisting}[caption=Solução do voto majoritário com uso de variável., label=lst:majVar]
+int temp1;
+void loop(){
+	inNot(S1);
+	andNotBit(S2);
+	andBit(S3);
+	out(temp1);
+	inNot(S1);
+	andBit(S2);
+	andNotBit(S3);
+	orBit(temp1);
+	out(temp1);
+	in(S1);
+	andNotBit(S2);
+	andNotBit(S3);
+	orBit(temp1);
+	out(temp1);
+	inNot(S1);
+	andNotBit(S2);
+	andNotBit(S3);
+	pilha.orBlock();
+	pilha.orBlock();
+	pilha.orBlock();
+	orBit(temp1);
+	outNot(D1);
+}
+\end{lstlisting}
+
+Note-se que não se usou a melhor estratégia lógica para ambas soluções apresentadas. Fica como exercício resolver este problema de forma mais compacta.
+\subsection{Memória}
+
+Até o momento usamos apenas a chamada lógica combinacional, onde a saída depende apenas da entrada. Porém é bem comum a situação de querermos que a saída fique num determinado estado em função da sua história pregressa. 
+
+Um exemplo simples: Como acionar LS1 apertando S1 e pará-lo apertando S2? O estado de LS1 depende então de qual foi o último botão apertado.
+
+É possível implementar este tipo de memória a partir de lógica combinacional usando realimentação. Ou seja, devemos ler a saída do sistema como sendo entrada, o que, apesar de estranho, é perfeitamente possível. O código \ref{lst:latchComb} mostra justamente esta implementação.
+\begin{lstlisting}[caption=Implementação de latch com lógica combinacional., label=lst:latchComb]
+  inNot(S1);     // Se chave S1 apertada
+  orNotBit(LS1);  // ou se LS1 ja esta acionado
+  andBit(S2);    // mas apenas se S2 nao estiver apertada
+  outNot(LS1);     // aciona LS1
+\end{lstlisting}
+
+Como esta função é bastante utilizada, ela recebeu o nome de \emph{latch} (tranca, ferrolho) e tem funções específicas, para deixar uma variável em 1 (função \lstinline|set()|) ou 0 (\lstinline|reset|) dali em diante, como mostrado no código \ref{lst:latch}.
+\begin{lstlisting}[caption=Funções para uso de latch., label=lst:latch]
+  inNot(S1);    // Se chave S1 apertada
+  reset(LS1);     // Seta LS1 (aciona dai em diante)
+  andBit(S2);   // Se S2 estiver apertada
+  set(LS1);    // Reseta LS1 (desliga dai em diante)
+\end{lstlisting}
+
+\subsection{Temporizadores}
+O arduino já tem uma função padrão \lstinline|delay|, que causa a paralisação da execução por um determinado tempo. O problema de delay é que ele para o programa todo, o que pode ocasionar problemas até de segurança.
+
+Os temporizadores definidos na plcLib permitem gerarmos atrasos em sinais específicos, sem mexer nos demais. O timerOn atrasa a subida de um sinal, enquanto que o timerOff atrasa a descida de um sinal, como pode ser visto no exemplo abaixo. Outro tipo de temporizador é o timerPulse, que na subida do sinal de entrada gera um pulso por um tempo determinado. timerPulse e timerOff são bem parecidos, com a diferença que o último começa a medir o tempo a partir da descida da entrada, enquanto que o primeiro mede a partir da subida da entrada. Cada função destas recebe como parâmetro a variável (do tipo \lstinline|unsigned long|) que contará o tempo e o tempo final a ser contado. Logo para cada temporizador é necessário ter uma variável para armazenar o tempo utilizado.
+\begin{lstlisting}[caption=Exemplos de uso de temporizadores., label=lst:temporizador]
+unsigned long TIMER0 = 0;
+unsigned long TIMER1 = 0;
+unsigned long TIMEa = 0;
+void loop(){
+  inNot(S1);    // Se chave S1 apertada
+  timerOn(TIMER0,2000); // atrasa subida por 2 segundos
+  outNot(D1);
+  inNot(S2);    // Se chave S2 apertada
+  timerOff(TIMER1,2000); // atrasa descida por 2 segundos
+  outNot(D2);
+  inNot(S3);    // Se chave S3 apertada
+  timerPulse(TIMERa, 2000);   // gera pulso de 2 segundos
+  outNot(D3);
+}
+\end{lstlisting}
+
+Um outro temporizador interessante é o timerCycle, que enquanto o acumulador for 1, gera um sinal alternado definido por 2 tempos: o tempo em alto e o tempo em baixo. Muito útil para alarmes.
+\begin{lstlisting}[caption=Exemplos de uso timerCycle., label=lst:timeCycle]
+unsigned long TempoLOW = 0;
+unsigned long TempoHIGH = 0;
+void loop(){
+	inNot(S1);
+	timerCycle(TempoLOW,1300,TempoHIGH,100);
+	outNot(LS1);
+}
+\end{lstlisting}
+
+\subsection{Contadores}
+Um contador incrementa ou decrementa uma variável de acordo com o número de eventos que recebe. Na implementação do plcLib, estes eventos são subidas (ir de 0 para 1) em suas entradas.
+
+Para os contadores, cria-se um objeto do tipo Counter, que tem um valor interno de preset presetValue, uma variável de contagem count, 4 entradas countUp, countDown, preset, clear e 2 saídas upperQ e lowerQ. As regras do contador são:
+\begin{itemize}
+  \item Uma subida em countUp incrementa o valor de count, se for menor que preset.
+  \item Uma subida em countDown decrementa o valor de count, se for maior que 0.
+  \item Uma subida em clear faz count igual a 0.
+  \item Uma subida em preset faz count igual a presetValue.
+  \item Se count for igual a 0, lowerQ retorna 1.
+  \item se count for igual a preset, upperQ retorna 1.
+\end{itemize}
+\begin{lstlisting}[caption=Exemplo de uso do contador., label=lst:contador]
+Counter ctr(10);           // Contador na faixa 0-10, comecando em zero
+unsigned long TIMER0 = 0;  // 
+unsigned long TIMER1 = 0;  // 
+
+void loop() {
+  inNot(S1);               // Se S1 apertada
+  timerOn(TIMER0, 10);     // 10 ms de atraso para debounce
+  ctr.countUp();           // incrementa ctr.
+  inNot(S2);               // Se S2 apertada
+  timerOn(TIMER1, 10);     // 10 ms de atraso para debounce
+  ctr.countDown();         // decrementa ctr.
+  inNot(S3);               // Se S3 apertada
+  ctr.clear();             // zera o contador.
+  ctr.lowerQ();            // Se zero,
+  outNot(D1);
+  ctr.upperQ();            // Se 10,
+  outNot(D2);
+}
+\end{lstlisting}
+É possível ainda criar um contador que inicializa no valor de preset. Tomando o exemplo do código \ref{lst:contador}, ao invés de fazer \lstinline|Counter ctr(10);|, faria-se \lstinline|Counter ctr(10,1);|
+%\subsection{}

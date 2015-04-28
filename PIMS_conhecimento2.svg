@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2985"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   width="330"
+   height="535"
+   sodipodi:docname="PIMS_conhecimento2.jpg">
+  <metadata
+     id="metadata2991">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2989">
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Mend"
+       style="overflow:visible;">
+      <path
+         id="path4008"
+         style="fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) rotate(180) translate(0,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path3984"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path3981"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;">
+      <path
+         id="path4002"
+         style="fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
+     id="namedview2987"
+     showgrid="false"
+     inkscape:zoom="0.61739345"
+     inkscape:cx="371.58414"
+     inkscape:cy="346.73746"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2985" />
+  <g
+     id="g3024"
+     transform="translate(4.3023405,-224.16201)">
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3026"
+       width="114.57169"
+       height="66.750465"
+       x="-15.94041"
+       y="310.83798"
+       rx="21.718279"
+       ry="21.718279" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="40.959694"
+       y="351.25424"
+       id="text3028"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3030"
+         x="40.959694"
+         y="351.25424"
+         style="font-size:20px">Informação</tspan></text>
+  </g>
+  <g
+     id="g3019"
+     transform="translate(-177.00118,-144.52261)">
+    <rect
+       ry="21.718279"
+       rx="21.718279"
+       y="310.83798"
+       x="-15.94041"
+       height="66.750465"
+       width="114.57169"
+       id="rect3013"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3015"
+       y="351.25424"
+       x="40.959694"
+       style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         style="font-size:20px"
+         y="351.25424"
+         x="40.959694"
+         id="tspan3017"
+         sodipodi:role="line">Dados</tspan></text>
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-193.94159"
+     y="247.01373"
+     id="text3032"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3034"
+       x="-193.94159"
+       y="247.01373"
+       style="font-size:14px">Temperatura do vapor</tspan><tspan
+       sodipodi:role="line"
+       x="-193.94159"
+       y="264.51373"
+       style="font-size:14px"
+       id="tspan3036">    na entrada do</tspan><tspan
+       sodipodi:role="line"
+       x="-193.94159"
+       y="282.01373"
+       style="font-size:14px"
+       id="tspan3042">    tanque A é 300 ºC.</tspan><tspan
+       sodipodi:role="line"
+       x="-193.94159"
+       y="299.51373"
+       style="font-size:14px"
+       id="tspan3038">Temperatura do vapor</tspan><tspan
+       sodipodi:role="line"
+       x="-193.94159"
+       y="317.01373"
+       style="font-size:14px"
+       id="tspan3044">    na saída do tanque</tspan><tspan
+       sodipodi:role="line"
+       x="-193.94159"
+       y="334.51373"
+       style="font-size:14px"
+       id="tspan3048">    A é 120 ºC.</tspan><tspan
+       sodipodi:role="line"
+       x="-193.94159"
+       y="352.01373"
+       style="font-size:14px"
+       id="tspan3058">Vazão do trocador de</tspan><tspan
+       sodipodi:role="line"
+       x="-193.94159"
+       y="369.51373"
+       style="font-size:14px"
+       id="tspan3060">    calor de A é.10 l/s.</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-12.617561"
+     y="169.82985"
+     id="text3032-1"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       x="-12.617561"
+       y="169.82985"
+       style="font-size:14px"
+       id="tspan3060-2">A transferência de</tspan><tspan
+       sodipodi:role="line"
+       x="-12.617561"
+       y="187.32985"
+       style="font-size:14px"
+       id="tspan3193">    calor para o tanque</tspan><tspan
+       sodipodi:role="line"
+       x="-12.617561"
+       y="204.82985"
+       style="font-size:14px"
+       id="tspan3195">    A é de 200 kcal/h.</tspan></text>
+  <g
+     id="g4802">
+    <rect
+       ry="21.718279"
+       rx="27.720207"
+       y="7.970202"
+       x="154.90417"
+       height="66.750465"
+       width="146.23402"
+       id="rect4791"
+       style="fill:none;stroke:#000000;stroke-width:2.25951648;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4793"
+       y="48.503639"
+       x="227.89911"
+       style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         style="font-size:20px"
+         y="48.503639"
+         x="227.89911"
+         id="tspan4795"
+         sodipodi:role="line">Conhecimento</tspan></text>
+  </g>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;marker-mid:url(#Arrow2Mend)"
+     d="m -118.68626,165.96535 c 0,0 14.14753,-14.87328 49.268098,-33.73176 21.53472,-11.56337 56.466579,-13.67679 56.466579,-13.67679"
+     id="path4807"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="csc" />
+  <path
+     sodipodi:nodetypes="csc"
+     inkscape:connector-curvature="0"
+     id="path4997"
+     d="m 48.273897,85.655401 c 0,0 14.14753,-14.87328 49.268098,-33.73176 21.534725,-11.56337 56.466575,-13.67679 56.466575,-13.67679"
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;marker-mid:url(#Arrow2Mend)" />
+  <text
+     sodipodi:linespacing="125%"
+     id="text5937"
+     y="92.337791"
+     x="156.45601"
+     style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     xml:space="preserve"><tspan
+       id="tspan5943"
+       style="font-size:14px"
+       y="92.337791"
+       x="156.45601"
+       sodipodi:role="line">O trocador do tanque A</tspan><tspan
+       style="font-size:14px"
+       y="109.83779"
+       x="156.45601"
+       sodipodi:role="line"
+       id="tspan5952">    é mais eficiente que</tspan><tspan
+       style="font-size:14px"
+       y="127.33779"
+       x="156.45601"
+       sodipodi:role="line"
+       id="tspan5954">    o do tanque B</tspan><tspan
+       style="font-size:14px"
+       y="144.8378"
+       x="156.45601"
+       sodipodi:role="line"
+       id="tspan5950" /></text>
+  <g
+     transform="translate(379.01198,-227.54045)"
+     id="g5956">
+    <rect
+       ry="21.718279"
+       rx="21.718279"
+       y="310.83798"
+       x="-15.94041"
+       height="66.750465"
+       width="114.57169"
+       id="rect5958"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text5960"
+       y="351.25424"
+       x="40.959694"
+       style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         style="font-size:20px"
+         y="351.25424"
+         x="40.959694"
+         id="tspan5962"
+         sodipodi:role="line">Informação</tspan></text>
+  </g>
+  <g
+     transform="translate(570.1026,-147.90105)"
+     id="g5964">
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect5966"
+       width="114.57169"
+       height="66.750465"
+       x="-15.94041"
+       y="310.83798"
+       rx="21.718279"
+       ry="21.718279" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="40.959694"
+       y="351.25424"
+       id="text5968"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5970"
+         x="40.959694"
+         y="351.25424"
+         style="font-size:20px">Dados</tspan></text>
+  </g>
+  <text
+     sodipodi:linespacing="125%"
+     id="text5972"
+     y="243.6353"
+     x="553.16223"
+     style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     xml:space="preserve"><tspan
+       style="font-size:14px"
+       y="243.6353"
+       x="553.16223"
+       id="tspan5974"
+       sodipodi:role="line">Temperatura do vapor</tspan><tspan
+       id="tspan5976"
+       style="font-size:14px"
+       y="261.13531"
+       x="553.16223"
+       sodipodi:role="line">    na entrada do</tspan><tspan
+       id="tspan5978"
+       style="font-size:14px"
+       y="278.63531"
+       x="553.16223"
+       sodipodi:role="line">    tanque B é 300 ºC.</tspan><tspan
+       id="tspan5980"
+       style="font-size:14px"
+       y="296.13531"
+       x="553.16223"
+       sodipodi:role="line">Temperatura do vapor</tspan><tspan
+       id="tspan5982"
+       style="font-size:14px"
+       y="313.63531"
+       x="553.16223"
+       sodipodi:role="line">    na saída do tanque</tspan><tspan
+       id="tspan5984"
+       style="font-size:14px"
+       y="331.13531"
+       x="553.16223"
+       sodipodi:role="line">    B é 125 ºC.</tspan><tspan
+       id="tspan5986"
+       style="font-size:14px"
+       y="348.63531"
+       x="553.16223"
+       sodipodi:role="line">Vazão do trocador de</tspan><tspan
+       id="tspan5988"
+       style="font-size:14px"
+       y="366.13531"
+       x="553.16223"
+       sodipodi:role="line">    calor de B é.12 l/s.</tspan></text>
+  <text
+     sodipodi:linespacing="125%"
+     id="text5990"
+     y="166.45142"
+     x="362.09241"
+     style="font-size:20px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     xml:space="preserve"><tspan
+       id="tspan5992"
+       style="font-size:14px"
+       y="166.45142"
+       x="362.09241"
+       sodipodi:role="line">A transferência de</tspan><tspan
+       id="tspan5994"
+       style="font-size:14px"
+       y="183.95142"
+       x="362.09241"
+       sodipodi:role="line">    calor para o tanque</tspan><tspan
+       id="tspan5996"
+       style="font-size:14px"
+       y="201.45142"
+       x="362.09241"
+       sodipodi:role="line">    B é de 170 kcal/h.</tspan></text>
+  <path
+     sodipodi:nodetypes="csc"
+     inkscape:connector-curvature="0"
+     id="path5998"
+     d="m 584.15218,162.58691 c 0,0 -14.1476,-14.87328 -49.2682,-33.73176 C 513.3493,117.29178 478.4175,115.17836 478.4175,115.17836"
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:url(#Arrow2Mend);marker-end:none" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:url(#Arrow2Mend);marker-end:none"
+     d="m 405.95111,84.599136 c 0,0 -14.14753,-14.87328 -49.2681,-33.73176 -21.53473,-11.56337 -56.46658,-13.67679 -56.46658,-13.67679"
+     id="path6000"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="csc" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot6002"
+     style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:20px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+       id="flowRegion6004"><rect
+         id="rect6006"
+         width="542.60376"
+         height="587.95569"
+         x="293.168"
+         y="-127.46249" /></flowRegion><flowPara
+       id="flowPara6008"></flowPara></flowRoot></svg>
