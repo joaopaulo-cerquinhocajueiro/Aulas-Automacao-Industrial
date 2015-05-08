@@ -1,9 +1,9 @@
 %!PS-Adobe-3.0 EPSF-3.0
-%%Title: C:/Users/joaopaulo/Documents/GitHub/Aulas-Automacao-Industrial/figuras/ladder_simbolos.eps
+%%Title: C:/Users/joaopaulo/Documents/GitHub/Aulas-Automacao-Industrial/figuras/ladder_exemplo_shannon.eps
 %%Creator: XCircuit v3.4 rev10
-%%CreationDate: Thu May 07 13:44:09 2015
+%%CreationDate: Wed May 06 12:19:08 2015
 %%Pages: 1
-%%BoundingBox: 68 68 433 119
+%%BoundingBox: 68 68 406 259
 %%DocumentNeededResources: font Helvetica 
 %%EndComments
 %%BeginProlog
@@ -165,28 +165,6 @@ begingate
 endgate
 } def
 
-/contatoNA {
-begingate
-1.00 0 0 0 liec_dig::no_contact
-endgate
-} def
-
-/contatoNF {
-begingate
-1.00 0 0 0 contatoNA
-1 1.00 -8 -24 8 24 2 polygon
-endgate
-} def
-
-/bobina {
-begingate
-1 1.00 16 0 48 135.00 225.00 xcarc
-1 1.00 -16 0 48 315.00 405.00 xcarc
-1 1.00 32 0 64 0 2 polygon
-1 1.00 -32 0 -64 0 2 polygon
-endgate
-} def
-
 
 %%EndSetup
 
@@ -194,14 +172,51 @@ endgate
 %%PageOrientation: Portrait
 /pgsave save def bop
 1.0000 inchscale
-2.6000 setlinewidth 939 -13 translate
+2.6000 setlinewidth 928 336 translate
 
-(bobina ou carga) {/Helvetica cf} 2 21 0 1.00 -608 224 label
-(contato aberto) {/Helvetica cf} 2 21 0 1.00 -272 224 label
-(contato fechado) {/Helvetica cf} 2 21 0 1.00 64 224 label
-1.00 0 -272 288 contatoNA
-1.00 0 64 288 contatoNF
-1.00 0 -592 288 bobina
+1.00 0 -672 288 liec_dig::no_contact
+1.00 0 -544 288 liec_dig::no_contact
+1.00 0 -416 288 liec_dig::no_contact
+1.00 0 -288 288 liec_dig::no_contact
+1.00 0 -544 160 liec_dig::no_contact
+(W) {/Helvetica cf} 2 17 0 1.00 -544 192 label
+1.00 0 -288 160 liec_dig::no_contact
+(V) {/Helvetica cf} 2 17 0 1.00 -288 192 label
+1.00 0 -160 160 liec_dig::no_contact
+(Y) {/Helvetica cf} 2 17 0 1.00 -160 192 label
+1.00 0 -32 160 liec_dig::no_contact
+(Z) {/Helvetica cf} 2 17 0 1.00 -32 192 label
+1.00 0 -288 32 liec_dig::no_contact
+(S) {/Helvetica cf} 2 17 0 1.00 -288 64 label
+1.00 0 -160 32 liec_dig::no_contact
+(W) {/Helvetica cf} 2 17 0 1.00 -160 64 label
+1.00 0 -32 32 liec_dig::no_contact
+(Z) {/Helvetica cf} 2 17 0 1.00 -32 64 label
+1.00 0 -160 -96 liec_dig::no_contact
+(Z) {/Helvetica cf} 2 17 0 1.00 -160 -64 label
+1.00 0 -288 -96 liec_dig::no_contact
+(X) {/Helvetica cf} 2 17 0 1.00 -288 -64 label
+1 1.00 -736 320 -736 -144 2 polygon
+1 1.00 112 288 32 135.00 225.00 xcarc
+1 1.00 80 288 32 -45.00 45.00 xcarc
+1 1.00 80 288 64 288 2 polygon
+1 1.00 112 288 128 288 2 polygon
+1 1.00 128 288 144 288 2 polygon
+(H) {/Helvetica cf} 2 17 0 1.00 96 320 label
+1 1.00 144 320 144 -144 2 polygon
+1 1.00 -608 160 -608 288 2 polygon
+1 1.00 -480 160 -352 160 2 polygon
+1 1.00 -352 288 -352 -96 2 polygon
+1 1.00 -96 -96 32 -96 32 288 3 polygon
+1 1.00 64 288 -224 288 2 polygon
+(W) {/Helvetica cf} 2 17 0 1.00 -672 320 label
+(X) {/Helvetica cf} 2 17 0 1.00 -544 320 label
+(Y) {/Helvetica cf} 2 17 0 1.00 -416 320 label
+(S) {/Helvetica cf} 2 17 0 1.00 -288 320 label
+1 1.00 -536 184 -552 136 2 polygon
+1 1.00 -280 312 -296 264 2 polygon
+1 1.00 -24 184 -40 136 2 polygon
+1 1.00 -152 56 -168 8 2 polygon
 pgsave restore showpage
 
 %%Trailer

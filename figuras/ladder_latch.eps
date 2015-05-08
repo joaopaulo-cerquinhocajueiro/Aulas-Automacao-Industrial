@@ -1,9 +1,9 @@
 %!PS-Adobe-3.0 EPSF-3.0
-%%Title: C:/Users/joaopaulo/Documents/GitHub/Aulas-Automacao-Industrial/figuras/ladder_simbolos.eps
+%%Title: C:/Users/joaopaulo/Documents/GitHub/Aulas-Automacao-Industrial/figuras/ladder_latch.eps
 %%Creator: XCircuit v3.4 rev10
-%%CreationDate: Thu May 07 13:44:09 2015
+%%CreationDate: Thu May 07 14:14:11 2015
 %%Pages: 1
-%%BoundingBox: 68 68 433 119
+%%BoundingBox: 68 68 244 187
 %%DocumentNeededResources: font Helvetica 
 %%EndComments
 %%BeginProlog
@@ -190,18 +190,24 @@ endgate
 
 %%EndSetup
 
-%%Page: 1 1
+%%Page: ladder_latch 1
 %%PageOrientation: Portrait
 /pgsave save def bop
 1.0000 inchscale
-2.6000 setlinewidth 939 -13 translate
+2.6000 setlinewidth 704 160 translate
 
-(bobina ou carga) {/Helvetica cf} 2 21 0 1.00 -608 224 label
-(contato aberto) {/Helvetica cf} 2 21 0 1.00 -272 224 label
-(contato fechado) {/Helvetica cf} 2 21 0 1.00 64 224 label
-1.00 0 -272 288 contatoNA
-1.00 0 64 288 contatoNF
-1.00 0 -592 288 bobina
+1.00 0 -448 256 liec_dig::no_contact
+(%I0) {/Helvetica cf} 2 17 0 1.00 -448 304 label
+1.00 0 -448 96 liec_dig::no_contact
+(%M0) {/Helvetica cf} 2 17 0 1.00 -448 144 label
+(%I1) {/Helvetica cf} 2 17 0 1.00 -320 304 label
+1.00 0 -320 256 contatoNF
+1.00 0 -128 256 bobina
+(%M0) {/Helvetica cf} 2 17 0 1.00 -128 304 label
+1 1.00 -64 320 -64 32 2 polygon
+1 1.00 -512 32 -512 320 2 polygon
+1 1.00 -192 256 -256 256 2 polygon
+1 1.00 -384 256 -384 96 2 polygon
 pgsave restore showpage
 
 %%Trailer

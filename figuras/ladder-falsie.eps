@@ -1,10 +1,10 @@
 %!PS-Adobe-3.0 EPSF-3.0
-%%Title: C:/Users/joaopaulo/Documents/GitHub/Aulas-Automacao-Industrial/figuras/ladder_simbolos.eps
+%%Title: C:/Users/joaopaulo/Documents/GitHub/Aulas-Automacao-Industrial/figuras/ladder-falsie.eps
 %%Creator: XCircuit v3.4 rev10
-%%CreationDate: Thu May 07 13:44:09 2015
+%%CreationDate: Wed May 06 12:12:38 2015
 %%Pages: 1
-%%BoundingBox: 68 68 433 119
-%%DocumentNeededResources: font Helvetica 
+%%BoundingBox: 68 68 298 209
+%%DocumentNeededResources: font Helvetica font Times-Roman 
 %%EndComments
 %%BeginProlog
 %
@@ -165,25 +165,24 @@ begingate
 endgate
 } def
 
-/contatoNA {
+/jumper {
+% trivial
 begingate
-1.00 0 0 0 liec_dig::no_contact
+1 1.00 0 0 10 -90.00 90.00 xcarc
+1 1.00 0 10 0 16 2 polygon
+1 1.00 0 -10 0 -16 2 polygon
+1.000 0.000 0.000 scb
+(a) {/Times-Roman cf} 2 1 0 1.00 0 16 pinlabel
+(a) {/Times-Roman cf} 2 13 0 1.00 0 -16 pinlabel
 endgate
 } def
 
-/contatoNF {
+/dot {
+% trivial
 begingate
-1.00 0 0 0 contatoNA
-1 1.00 -8 -24 8 24 2 polygon
-endgate
-} def
-
-/bobina {
-begingate
-1 1.00 16 0 48 135.00 225.00 xcarc
-1 1.00 -16 0 48 315.00 405.00 xcarc
-1 1.00 32 0 64 0 2 polygon
-1 1.00 -32 0 -64 0 2 polygon
+248 1.00 0 0 6 0.00 360.00 xcarc
+1.000 0.000 0.000 scb
+(x) {/Times-Roman cf} 2 29 0 1.00 0 0 pinlabel
 endgate
 } def
 
@@ -194,14 +193,52 @@ endgate
 %%PageOrientation: Portrait
 /pgsave save def bop
 1.0000 inchscale
-2.6000 setlinewidth 939 -13 translate
+2.6000 setlinewidth 736 298 translate
 
-(bobina ou carga) {/Helvetica cf} 2 21 0 1.00 -608 224 label
-(contato aberto) {/Helvetica cf} 2 21 0 1.00 -272 224 label
-(contato fechado) {/Helvetica cf} 2 21 0 1.00 64 224 label
-1.00 0 -272 288 contatoNA
-1.00 0 64 288 contatoNF
-1.00 0 -592 288 bobina
+1.00 0 -480 192 liec_dig::no_contact
+1.00 0 -256 192 liec_dig::no_contact
+1.00 45 -304 80 liec_dig::no_contact
+1 1.00 -416 192 -336 112 2 polygon
+1 1.00 -160 128 -96 192 2 polygon
+1.00 225 -256 32 jumper
+1 1.00 -248 40 -232 56 2 polygon
+1 1.00 -264 24 -272 16 2 polygon
+1 1.00 -320 192 -416 192 2 polygon
+1.00 0 -256 -48 liec_dig::no_contact
+1 1.00 -288 64 -176 -48 2 polygon
+1 1.00 -272 16 -336 -48 2 polygon
+1 1.00 16 192 32 135.00 225.00 xcarc
+1 1.00 -16 192 32 -45.00 45.00 xcarc
+1 1.00 -16 192 -32 192 2 polygon
+1 1.00 16 192 32 192 2 polygon
+1 1.00 16 -48 32 135.00 225.00 xcarc
+1 1.00 -16 -48 32 -45.00 45.00 xcarc
+1 1.00 -16 -48 -32 -48 2 polygon
+1 1.00 16 -48 32 -48 2 polygon
+1 1.00 -32 -48 -192 -48 2 polygon
+1 1.00 -32 192 -192 192 2 polygon
+1.00 0 -96 192 dot
+1.00 0 -176 -48 dot
+1.00 0 -480 -48 liec_dig::no_contact
+1 1.00 -416 -48 -320 -48 2 polygon
+1.00 0 -336 -48 dot
+1.00 0 -416 192 dot
+1 1.00 -544 224 -544 -80 2 polygon
+1 1.00 48 224 48 -80 2 polygon
+1 1.00 32 -48 48 -48 2 polygon
+1 1.00 32 192 48 192 2 polygon
+1 1.00 -248 -24 -264 -72 2 polygon
+1.00 315 -198 90 liec_dig::no_contact
+1 1.00 -209 112 -187 67 2 polygon
+1 1.00 -472 -24 -488 -72 2 polygon
+(A) {/Helvetica cf} 2 17 0 1.00 -480 224 label
+(A) {/Helvetica cf} 2 17 0 1.00 -480 -16 label
+(B) {/Helvetica cf} 2 17 0 1.00 -256 224 label
+(B) {/Helvetica cf} 2 29 0 1.00 -256 -80 label
+(C) {/Helvetica cf} 2 31 0 1.00 -320 48 label
+(C) {/Helvetica cf} 2 28 0 1.00 -176 64 label
+(X) {/Helvetica cf} 2 17 0 1.00 0 224 label
+(Y) {/Helvetica cf} 2 17 0 1.00 0 -16 label
 pgsave restore showpage
 
 %%Trailer

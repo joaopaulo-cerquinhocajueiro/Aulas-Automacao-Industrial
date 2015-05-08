@@ -1,0 +1,98 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.4
+%  Library name is: ladder.lps
+%
+
+% Depend bobinaN bobina
+% Depend bobinaR bobina
+% Depend bobinaS bobina
+% Depend liec_dig::nc_contact liec_dig::no_contact
+% Depend contatoNA liec_dig::no_contact
+% Depend contatoNF contatoNA
+% Depend contatoP liec_dig::no_contact
+% Depend contatoN contatoNA
+
+% XCircuitLib library objects
+/liec_dig::relay_coil {
+begingate
+1 1.00 0 0 32 0.00 360.00 xcarc
+1 1.00 -64 0 -32 0 2 polygon
+1 1.00 32 0 64 0 2 polygon
+endgate
+} def
+
+/bobina {
+begingate
+1 1.00 16 0 48 135.00 225.00 xcarc
+1 1.00 -16 0 48 315.00 405.00 xcarc
+1 1.00 32 0 64 0 2 polygon
+1 1.00 -32 0 -64 0 2 polygon
+endgate
+} def
+
+/bobinaN {
+begingate
+1.00 0 0 0 bobina
+1 1.00 -16 -24 16 24 2 polygon
+endgate
+} def
+
+/bobinaR {
+begingate
+1.00 0 0 0 bobina
+(R) {/Helvetica 1.500 cf} {/Helvetica cf} 3 21 0 1.00 0 0 label
+endgate
+} def
+
+/bobinaS {
+begingate
+1.00 0 0 0 bobina
+(S) {/Helvetica 1.500 cf} {/Helvetica cf} 3 21 0 1.00 0 0 label
+endgate
+} def
+
+/liec_dig::no_contact {
+begingate
+1 1.00 -64 0 -16 0 2 polygon
+1 1.00 -16 32 -16 -32 2 polygon
+1 1.00 16 0 64 0 2 polygon
+1 1.00 16 32 16 -32 2 polygon
+endgate
+} def
+
+/liec_dig::nc_contact {
+begingate
+1.00 0 0 0 liec_dig::no_contact
+1 1.00 32 32 -32 -32 2 polygon
+endgate
+} def
+
+/contatoNA {
+begingate
+1.00 0 0 0 liec_dig::no_contact
+endgate
+} def
+
+/contatoNF {
+begingate
+1.00 0 0 0 contatoNA
+1 1.00 -8 -24 8 24 2 polygon
+endgate
+} def
+
+/contatoP {
+begingate
+1.00 0 0 0 liec_dig::no_contact
+(P) {/Helvetica cf} 2 21 0 1.00 0 0 label
+endgate
+} def
+
+/contatoN {
+begingate
+1.00 0 0 0 contatoNA
+(N) {/Helvetica cf} 2 21 0 1.00 0 0 label
+endgate
+} def
+
+
+% EndLib

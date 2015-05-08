@@ -1,9 +1,9 @@
 %!PS-Adobe-3.0 EPSF-3.0
-%%Title: C:/Users/joaopaulo/Documents/GitHub/Aulas-Automacao-Industrial/figuras/ladder_simbolos.eps
+%%Title: C:/Users/joaopaulo/Documents/GitHub/Aulas-Automacao-Industrial/figuras/ladder_osc.eps
 %%Creator: XCircuit v3.4 rev10
-%%CreationDate: Thu May 07 13:44:09 2015
+%%CreationDate: Wed May 06 12:14:25 2015
 %%Pages: 1
-%%BoundingBox: 68 68 433 119
+%%BoundingBox: 68 68 184 127
 %%DocumentNeededResources: font Helvetica 
 %%EndComments
 %%BeginProlog
@@ -165,28 +165,6 @@ begingate
 endgate
 } def
 
-/contatoNA {
-begingate
-1.00 0 0 0 liec_dig::no_contact
-endgate
-} def
-
-/contatoNF {
-begingate
-1.00 0 0 0 contatoNA
-1 1.00 -8 -24 8 24 2 polygon
-endgate
-} def
-
-/bobina {
-begingate
-1 1.00 16 0 48 135.00 225.00 xcarc
-1 1.00 -16 0 48 315.00 405.00 xcarc
-1 1.00 32 0 64 0 2 polygon
-1 1.00 -32 0 -64 0 2 polygon
-endgate
-} def
-
 
 %%EndSetup
 
@@ -194,14 +172,20 @@ endgate
 %%PageOrientation: Portrait
 /pgsave save def bop
 1.0000 inchscale
-2.6000 setlinewidth 939 -13 translate
+2.6000 setlinewidth 592 96 translate
 
-(bobina ou carga) {/Helvetica cf} 2 21 0 1.00 -608 224 label
-(contato aberto) {/Helvetica cf} 2 21 0 1.00 -272 224 label
-(contato fechado) {/Helvetica cf} 2 21 0 1.00 64 224 label
-1.00 0 -272 288 contatoNA
-1.00 0 64 288 contatoNF
-1.00 0 -592 288 bobina
+1.00 0 -336 160 liec_dig::no_contact
+1 1.00 -144 160 32 135.00 225.00 xcarc
+1 1.00 -176 160 32 -45.00 45.00 xcarc
+1 1.00 -176 160 -192 160 2 polygon
+1 1.00 -144 160 -128 160 2 polygon
+1 1.00 -128 160 -112 160 2 polygon
+1 1.00 -328 184 -344 136 2 polygon
+(Q1) {/Helvetica cf} 2 17 0 1.00 -336 208 label
+(Q1) {/Helvetica cf} 2 17 0 1.00 -160 192 label
+1 1.00 -272 160 -192 160 2 polygon
+1 1.00 -112 224 -112 96 2 polygon
+1 1.00 -400 96 -400 224 2 polygon
 pgsave restore showpage
 
 %%Trailer

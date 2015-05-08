@@ -3,7 +3,8 @@
 
 A biblioteca plcLib (http://www.electronics-micros.com/software-hardware/plclib-arduino/) define um conjunto de funções muito parecidas com as da linguagem \emph{Instruction List}, e que podem ser facilmente transcritas para a linguagem Ladder. Na configuração padrão, chamada pela função \lstinline|setupPLC()| este sistema define 4 entradas (X0 a X3, usando A0 a A3) e quatro saídas (Y0 a Y3, usando 3, 5, 6 e 9).
 
-Usando o Multi-function Shield, as entradas correspondem ao potenciômetro (A0) e aos 3 botões, logo estão bem adequadas. As saídas correspondem ao buzzer (3) e a três conectores de servo, porém não temos nenhuma saída ligada aos leds. Para definir todas entradas e saídas de uma vez, fazemos:
+Vamos usar um shield de arduino que já tem 3 botões de entrada, 4 leds, uma busina e um potenciômetro: o Multi-function shield (MFS).
+Usando o MFS, as entradas correspondem ao potenciômetro (A0) e aos 3 botões, logo estão bem adequadas. As saídas correspondem ao buzzer (3) e a três conectores de servo, porém não temos nenhuma saída ligada aos leds. Para definir todas entradas e saídas de uma vez, fazemos:
 \begin{lstlisting}[caption=Definição de função e constantes para usar o o Multi-function Shield com o plcLib., label=lst:setupShield]
 // Definicao das constantes dos pinos
 const int VR = A0;
@@ -43,7 +44,7 @@ void setupShield(){ // Funcao para inicializar
 }
 \end{lstlisting}
 
-Deste modo basta chamarmos \lstinline|setupShield()| no setup que configuramos nossa entradas e saídas.
+Deste modo basta chamarmos \lstinline|setupShield()| no setup que configuramos nossa entradas e saídas. Infelizmente neste shield, os botões geram 0 quando apertados e 1 quando ligados e tanto os leds quanto a buzina acionam com nível lógico baixo, o que faz com que nossas entradas e saídas tenham que ser invertidas. Isto porém não impede o funcionamento do circuito.
 
 \subsection{Acumulador}
 Os CLPs trabalham com o conceito de acumulador (que na implementação do plcLib tem o nome scanValue), que é uma variável implícita. As funções pegam implicitamente o valor a ser trabalhado do acumulador e salvam o resultado de volta nele.
