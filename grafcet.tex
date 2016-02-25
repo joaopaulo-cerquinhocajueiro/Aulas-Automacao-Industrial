@@ -1,12 +1,110 @@
 %!TEX root = principal.tex
-\chapter{Linguagem Grafcet}
+\chapter{Linguagem grafcet}
+
+GRAphe Fonctionnel de Commande Etape/Transition - Grafo funcional de comando etapa/transição, é um formalismo matemático tal como uma máquina de estados. Tem origem na chamada máquina de estados, mas com mais funcionalidades, tais como a possibilidade de ter estados em paralelo e de ter macro-estados.
+
+Um diagrama grafcet é composto dos seguintes elementos: estados, transições, ações, divergências e convergências E e divergências e convergências OU.
+
+O básico do grafcet é a sequência estado-transição-estado, como mostra na figura \ref{fig:grafcetSimples}. Ela apresenta um diagrama grafcet com 3 estados (os quadrados) e três transições (os retângulos verde e vermelhos). O estado 0 é o estado inicial, o que é indicado pela linha dupla, porém neste momento o estado ativo é o Estado 1, indicado pela ficha. As transições tem condições que, quando veradeiras, as ativam. Neste caso uma transição ativa é representada pela cor verde, enquanto uma inativa é representada pela cor vermelha.
+\begin{figure}[hbt]
+  \centering
+  \includegraphics[scale=0.6]{figuras/grafcetSimples}
+  \caption{Exemplo de um diagrama grafcet simples.}
+  \label{fig:grafcetSimples}
+\end{figure}
+
+A evolução do sistema descrito em grafcet é dada pelo disparo das transições. Um transição dispara quando:
+\begin{itemize}
+  \item ela está ativa e
+  \item todos os estados anteriores a ela estão ativos.
+\end{itemize}
+
+Quando uma transição dispara ela desativa todos os estados anteriores a ela (os estados acima) e ativa todos os posteriores (os abaixo). Por exemplo, se na figura \ref{fig:grafcetSimples} a condição A se tornasse verdadeira, como o único estado anterior, o Estado 1 está ativo, esta transição dispararia, desativando Estado 1 e ativando Estado 2. Esta sequência é mostrada na figura \ref{fig:grafcetDisparo}.
+\begin{figure}[hbt]
+  \centering
+  \includegraphics[scale=0.6]{figuras/grafcetDisparo}
+  \caption{Sequência de disparo da transição A}
+  \label{fig:grafcetDisparo}
+\end{figure}
+
+\section{Divergências e convergências}
+
+No grafcet, pode-se ter um estado com mais de uma transição de saída, que pode levar para estados diferentes de acordo com qual transição dispare primeiro. A isto se chama uma \emph{divergência OU}, pois separa em dois caminhos excludentes. Da mesma forma, duas (ou mais) transições podem levar para o mesmo estado, o que se chama de convergência OU. A figura \ref{fig:grafcetdivOU} mostra um exemplo em que o sistema pode evoluir por dois caminhos diferentes, com o uso de divergência e convergência OU.
+
+\begin{figure}[hbt]
+  \centering
+  \includegraphics[scale=0.6]{figuras/grafcetdivOU}
+  \caption{Exemplo de grafcet com divergência e convergência OU. O !A indica que a transição está ativa quando A for falso.}
+  \label{fig:grafcetdivOU}
+\end{figure}
+
+Note-se na figura \ref{fig:grafcetdivOU} que o Estado 1 é obrigatoriamente transitório, pois ou A é verdadeiro e o sistema evolui imediatamente para o Estado 2 ou A é falso e o sistema ativa o Estado 3. É possível definir transições que estejam ativas ao mesmo tempo, neste caso o sistema evolui para a transição com maior prioridade -- ou a mais a esquerda ou se tiver uma prioridade explícita.
+
+Diferente de uma máquina de estados, no grafcet é permitido que uma transição acione mais que um estado. Neste caso o sistema se divide em caminhos paralelos. Isto é chamado de divergência E e indicado por duas linhas horizontais, para diferenciar da divergência OU. Da mesma forma, uma convergência E liga vários estágios a uma única transição, transformando caminhos paralelos num único caminho. A figura \ref{fig:grafcetdivE} mostra um exemplo de divergência e convergência E.
+
+\begin{figure}[hbt]
+  \centering
+  \includegraphics[scale=0.6]{figuras/grafcetdivE}
+  \caption{Exemplo de grafcet com divergência e convergência E.}
+  \label{fig:grafcetdivE}
+\end{figure}
+
+Note que, neste caso, mesmo com P ativo, o sistema não desativa o Estado 2a nem ativa Estado 0, pois como o Estado 2b não está ativo, a transição P não pode disparar.
+
+\section{Ações}
+Outra característica do grafcet é que podem ser definidas ações, ligadas a estados. O que exatamente compõem uma ação depende da implementação do grafcet. Peguemos dois exemplos: o JGrafchart e a SFC, que é a descrição de grafcet definida pela norma IEC61131.
+
+No JGrafchart, uma ação pode ser uma definição de valor (um \emph{assignment}), da forma \lstinline|variavel = expressao|, uma chamada de subrotina (\emph{call}) ou uma variável booleana (\emph{bool}), que fica verdadeira enquanto o estado estiver ativo. Um qualificador de uma letra define o momento em que a ação é executada:
+\begin{description}
+  \item[S assignment|call;] Executa apenas uma vez, quando a etapa é ativada.
+  \item[X assignment|call;] Executa apenas uma vez, quando a etapa é desativada.
+  \item[P assignment|call;] Executa a cada ciclo enquanto a ação estiver acionada.
+  \item[N bool;] Aciona a variável booleana enquanto a etapa estiver acionada.
+  \item[A assignment|call;] Executa apenas uma vez, se a etapa for desativada por uma transição de exceção (apenas definida no JGrafchart).
+\end{description}
+
+Note-se que a ação \lstinline/N bool;/ é equivalente a \lstinline/P bool=1;/ e é presente para facilitar a escrita, já que tal operação é feita muitas vezes.
+
+Toda etapa tem uma variável booleana x (\lstinline|<nome_da_etapa>.x|), que aciona quando a etapa é acionada, e uma variável de tempo em décimos de segundo t (\lstinline|<nome_da_etapa>.t|) e em segundos s (\lstinline|<nome_da_etapa>.s|).
+
+As ações do SFC são do formato \textbf{\lstinline/qualificador funcao|variavel finalizado/}. \lstinline|finalizado| é uma variável opcional no caso de se usar uma função, que aciona quando a função termina, o que a torna útil para ser utilizada na transição de saída da etapa.
+
+O qualificador pode ser qualquer um dos descritos na tabela \ref{tab:qualiSFC}. Pode-se não especificar o qualificador, onde o comportamento fica o mesmo de se usar o qualificador N. No caso da ação ser uma função, ele é executada sempre que ficar ativa. Todos os qualificadores que tem tempo acompanham um valor de tempo dado ou por uma variável ou por uma constante da forma \lstinline|T#4k|, onde k pode ser t (décimo de segundo), s (segundo), m, (minuto) ou h (hora).
+\begin{table}[hbt]
+  \caption{Qualificadores do SFC}
+  \label{tab:qualiSFC}
+  \centering
+
+  \begin{tabularx}{\textwidth}{|c|X|}
+  \hline
+
+  \hline
+  \textbf{Qualificador} & \textbf{descrição}\\
+  \hline
+   \textbf{N}  & Ativa a etapa estiver acionada. \\
+   \textbf{S}  & Set -- ativa e mantém ativado mesmo depois de sair da etapa. \\
+   \textbf{R}  & Reset -- desativa. \\
+   \textbf{P}  & Ativa apenas no primeiro ciclo que a etapa estiver ativa. \\
+   \textbf{L tempo}  & Ativa pelo tempo determinado enquanto a etapa estiver acionada.\\
+   \textbf{SL tempo}  & Ativa pelo tempo determinado independente da etapa ainda estar acionada.\\
+   \textbf{D tempo}  & Ativa após o tempo determinado enquanto a etapa estiver acionada.\\
+   \textbf{SD tempo}  & Seta após o tempo determinado independente da etapa ainda estar acionada.\\
+   \textbf{DS tempo}  & Seta após o tempo determinado se a etapa ainda estiver acionada.\\
+  \hline
+
+  \hline
+  \end{tabularx}
+\end{table}
+
+\clearpage
+\section{Níveis}
 O Grafcet pode ser definido em 2 níveis de abstração: o 1 e o 2. O nível 1 serve como uma ferramenta de desenvolvimento, para analisar a partir do problema como um todo a sequência de etapas, as ações a serem realizadas em cada etapa e as condições de transição de uma etapa para outra. No nível 1 as ações e transições são descritas de forma ampla, para permitirem uma melhor visualização do processo pelo desenvolvedor. O resultado final é uma descrição dos requisitos daquelas etapas e transições e não serve como uma linguagem para programar um sistema.
 
 Já o Grafcet nível 2 é propriamente uma linguagem de programação, com diferentes implementações. Uma delas é o SFC - \emph{Sequential Function Chart}, descrita no padrão IEC1131-3 para programação de CLPs. No SFC, cada ação corresponde a uma atuação nas saídas ou variáveis internas do CLP e cada transição corresponde a um valor binário obtido no CLP seja de entradas, seja de comparações de valores analógicos ou de tempo.
 
 Desta forma o principal uso do grafcet é num projeto top-down, onde a partir do problema se desenvolve a sequência a ser seguida no grafcet nível 1, a partir deste se definem todas as entradas, saídas e condições necessárias para o controle automático daquela sequência e então programa-se o sistema usando grafcet nível 2.
 
-Tomemos como exemplo uma tarefa relativamente simples: cozinhar um ovo.
+Tomemos como exemplo uma tarefa relativamente simples: cozinhar um ovo. Considere-se o sistema da figura \ref{fig:cozinhar_ovo}, consistindo de uma panela, uma entrada de água, uma boca de fogão a gás e um mecanismo que solte o ovo na água.
 
 \begin{figure}[!h]
 \centering
@@ -129,46 +227,40 @@ Tomemos como exemplo uma tarefa relativamente simples: cozinhar um ovo.
 \label{fig:cozinhar_ovo}
 \end{figure}
 
+Podemos inicialmente fazer um grafcet considerando que tudo dá sempre certo: ao iniciarmos o sistema, a panela enche de água, o ovo é colocado, o fogo acendido e aguarda-se até o ovo ficar pronto, de onde se retira a panela para tirar o ovo. Esta sequência é descrita pelo grafcet da figura \ref{fig:grafcetOvoOK}.
+
 \begin{figure}[!h]
 \centering
-\begin{tikzpicture}[scale=0.4]
-\EtapeInit[0,0]{0}\ActionX{X0}{Esperando início.}
-\Transition[VX0]{1}\Recept{T1}{Botão iniciar apertado e panela presente.}
-\Etape[VT1]{1}\ActionX{X1}{Encher de água.}
-\Transition{2}\Recept{T2}{Panela cheia}
-\Etape[VT2]{2}\ActionX{X2}{Colocar o ovo}
-\DivOU{X2}{18/L2,-3/L1}
-\Transition[L1]{3}\Recept{T3}{Ovo presente.}
-\Transition[L2]{7}\Recept{T7}{Ovo não presente.}
-\DecaleNoeudx[-2]{T3}{T3f}
-\DecaleNoeudx[-2]{VT3}{VT3f}
-\ConvOU{T3f}{T3}{L11}
-\Etape[L11]{3}\ActionX{X3}{Acionar o fogo.}
-\DivOU{X3}{0/L6,12/L7}
-\Transition[L6]{4}\Recept{T4}{Ovo cozido.}
-\Transition[L7]{9}\Recept{T9}{Problema com o fogo.}
-\ConvOU{T9}{T7}{L5}
-\Etape[L5]{5}\ActionX{X5}{Deu bronca.}
-\DivOU{X5}{0/L4,-7/L3}
-\Transition[L3]{6}\Recept{T6}{Resolvido.}
-\LienRetour[12]{T6}{VT3f}
-
-\Transition[L4]{8}\Recept{T8}{Cancelado.}
-%\LienRetour[-14]{T8}{X0}
-\Etape[VT4]{4}\ActionX{X4}{Ovo pronto.}
-\Transition[VX4]{5}\Recept{T5}{Panela retirada}
-\LienTE[4]{T8}
-\DecaleNoeudy[2]{T8}{T8}
-\ConvOU{T8}{T5}{L9}
-\LienTE[-4]{L9}
-\LienRetour[-22]{L9}{X0}
- 
- 
-% \LienRetour{T7}{X0}
-\end{tikzpicture}
-\caption{Diagrama grafcet nível 1 para cozinhar um ovo.}
-\label{fig:grafcet1}
+\includegraphics[scale=1]{figuras/ovoOK}
+\caption{Diagrama grafcet nível 1 para cozinhar um ovo de forma otimista.}
+\label{fig:grafcetOvoOK}
 \end{figure}
+
+Porém, problemas acontecem. Pode-se, por exemplo, esquecer de colocar a panela de volta antes de iniciar, faltar fogo ou acabar o ovo. Colocando todas estas condições a mais e defininindo o que fazer se elas acontecerem o grafcet cresce para o apresentado na figura \ref{fig:grafcetOvo1}.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{figuras/ovoNivel1}
+
+\caption{Diagrama grafcet nível 1 para cozinhar um ovo.}
+\label{fig:grafcetOvo1}
+\end{figure}
+
+Com base neste diagrama, pode-se analisar agora quais são os sensores e atuadores necessários para esta tarefa, mostrados na figura \ref{fig:cozinhar_ovo2}. São eles:
+
+\begin{description}
+  \item[S\_PP] Sensor de presença para detectar a panela.
+  \item[S\_N] Sensor de distância para obter o nível de água.
+  \item[S\_G] Sensor de gás.
+  \item[B\_I] Botão de início.
+  \item[B\_OK] Botão de OK, para continuar se der bronca.
+  \item[B\_C] Botão de cancelamento.
+  \item[PO] Solenóide para abrir a portinhola do ovo.
+  \item[VA] Válvula de controle da água.
+  \item[VG] Válvula de controle do gás.
+  \item[CENTELHA] para ligar o fogo.
+  \item[ALARME] para indicar que deu errado.
+\end{description}
 
 \begin{figure}[!h]
 \centering
@@ -344,67 +436,17 @@ Tomemos como exemplo uma tarefa relativamente simples: cozinhar um ovo.
   \path[shift={(99.03245,288.02393)},draw=c0000ff,line join=miter,line
     cap=butt,line width=0.800pt] (202.2824,197.1745) -- (193.5911,197.1745);
 \end{scope}
-
 \end{tikzpicture}
 \caption{Sistema para cozinhar ovo com sensores e atuadores.}
 \label{fig:cozinhar_ovo2}
 \end{figure}
 
+Então com base nos sensores e atuadores presentes, podemos fazer o grafcet nível 2 (figura \ref{fig:grafcetOvo2}, descrevendo as ações e transições de acordo com estas entradas e saídas.
+
 \begin{figure}[!h]
-{\centering
-\begin{tikzpicture}[scale=0.4]
-\EtapeInit[0,0]{0}%\ActionX{X0}{Esperando início.}
-\Transition[VX0]{1}\Recept{T1}{B\_I \emph{AND} S\_PP}
-\Etape[VT1]{1}\ActionX{X1}{VA}
-\Transition{2}\Recept{T2}{SN<nivel\_agua\_ovo\_galinha}
-\Etape[VT2]{2}\ActionX{X2}{PO}
-\DivOU{X2}{18/L2,-3/L1}
-\Transition[L1]{3}\Recept{T3}{A}
-\Transition[L2]{7}\Recept{T7}{B}
-\DecaleNoeudx[-2]{T3}{T3f}
-\DecaleNoeudx[-2]{VT3}{VT3f}
-\ConvOU{T3f}{T3}{L6}
-\Etape[L6]{3a}\ActionX{X3a}{VG}
-\DivOU{X3a}{0/L6a,19/L7a}
-\Transition[L6a]{10}\Recept{T10}{SG}
-\Transition[L7a]{11}\Recept{T11}{C}
-\Etape[VT10]{3b}\ActionXV{X3b}{VG}\Action{X3b}{P}\Action{X3b}{CENTELHA}
-\LienET[5]{X3b}
-%\Etape[VT10]{3b}\ActionX{X3b}{VG}\Action{X3b}{P}\Action{X3b}{CENTELHA}
-\DivOU{X3b}{0/L6,16/L7}
-\Transition[L6]{4}\Recept{T4}{E}
-\Transition[L7]{9}\Recept{T9}{D}
-\ConvOU{T9}{T7,T11}{L5}
-\Etape[L5]{5}\ActionX{X5}{A}
-\DivOU{X5}{0/L4,-7/L3}
-\Transition[L3]{6}\Recept{T6}{B\_OK}
-\LienRetour[12]{T6}{VT3f}
-
-\Transition[L4]{8}\Recept{T8}{B\_C}
-%\LienRetour[-14]{T8}{X0}
-\Etape[VT4]{4}%\ActionX{X4}{Ovo pronto.}
-\Transition[VX4]{5}\Recept{T5}{\emph{AND} S\_PP}
-\LienTE[4]{T8}
-\DecaleNoeudy[2]{T8}{T8}
-\ConvOU{T8}{T5}{L9}
-\LienTE[-4]{L9}
-\LienRetour[-14]{L9}{X0}
- 
- 
-% \LienRetour{T7}{X0}
-\end{tikzpicture}
-}
-A = S\_N < (nivel\_ovo\_galinha - volume\_ovo\_galinha)
-
-B = \emph{NOT} A \emph{AND} 2.T>T\#10s
-
-C = \emph{NOT} SG \emph{AND} 3a.T>T\#4s
-
-D = SG \emph{AND} 3b.T>T\#4s
-
-E = \emph{NOT} SG \emph{AND} 3b.T>tempo\_ovo\_galinha
-
+\centering
+\includegraphics[width=\textwidth]{figuras/ovoNivel2}
 \caption{Diagrama grafcet nível 2 para cozinhar um ovo.}
-\label{fig:grafcet2}
+\label{fig:grafcetOvo2}
 \end{figure}
 

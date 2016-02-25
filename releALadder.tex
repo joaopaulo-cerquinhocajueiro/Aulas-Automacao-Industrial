@@ -1,9 +1,19 @@
 %!TEX root = principal.tex
-\section{De relês a CLPs}
+\section{Dispositivos Eletromecânicos}
 
-Antes do desenvolvimento de CLPs, a lógica de operação de sistemas industriais era feita através de dispositivos eletromecânicos chamados relês, que são que chave controladas eletricamente. Ainda hoje há várias aplicações que utilizam relês, principalmente quando se trabalha com altas tensões e correntes e em baixa velocidade. Um elemento muito usado na indústria é o contator, que nada mais é do que um relê trifásico.
+Há vários dispositivos eletromecânicos de interesse para a automação industrial, dos quais destacamos motores elétricos, solenóides, chaves e relês.
 
-Um relê eletromecânico é um chave que se mantém em uma determinada posição (fechada ou aberta) pela ação de uma mola e que muda de estado (abre ou fecha) pela ação de um eletroímã. Ou seja, ao se magnetizar este eletroímã o relê abre (fecha) e volta a fechar (abrir) sem esta magnetização. Eletricamente pode-se visualizar um relê apenas como um indutor e uma chave, e muitas vezes é desta forma que ele é representado em um diagrama esquemático (vide exemplo na Figura \ref{fig:diagRele}).
+Destes, motores e solenóides são atuadores e chaves são sensores. Relês podem ser usados tanto como atuadores como como sensores, embora sejam mais usados em atuadores.
+
+Chaves já foram vistas junto com instrumentação, enquanto motores são assuntos de outras disciplinas e fogem do escopo desta disciplian.
+
+Solenóides são basicamente eletroimãs com um eixo ferromagnético preso a uma mola. O eixo pode ter duas posições: uma mantida pela mola, que é a posição que ele assume quando o eletroimã não é acionado, e outra forçando a mola, quando o eletroimã é acionado. Ou seja: são dispositivos de acionamento binários.
+
+Solenóides tipicamente fornecem uma movimentação de no máximo poucos centímetros a cargas de miligramas a dezenas de kilogramas. São muito usados para acionamento de válvulas - válvulas solenóides.
+
+Relês eletromecânicos são, por construção, solenóides no qual o eixo faz abrir ou fechar contatos elétricos. Eles são chaves elétricas acionadas eletricamente. Hoje em dia existem relês baseados em eletrônica, chamados de relês de estado sólido, que tem a mesma função mas por princípios de funcionamento bem diferentes. Eletricamente pode-se visualizar um relê apenas como um indutor (a bobina do eletroimã) e um contato, e muitas vezes é desta forma que ele é representado em um diagrama esquemático (vide exemplo na Figura \ref{fig:diagRele}).
+
+O estado de repouso dos cantatos define o tipo básico do relê: normalmente aberto ou normalmente fechado. É comum relês que tenham 2 ou mais contatos acionadas por uma mesma bobina, inclusive podendo ser uma normalmente aberta e outra normalmente fechada, tal como o relê da figura \ref{fig:fotoRele}.
 
 \begin{figure}[!h]
   \centering
@@ -12,9 +22,16 @@ Um relê eletromecânico é um chave que se mantém em uma determinada posição
   \caption{Foto de um relê e representação esquemática.}
 \end{figure}
 
-O estado de repouso define o tipo básico do relê: normalmente aberto ou normalmente fechado. Também é comum relês que tenham 2 ou mais chaves acionadas por uma mesma bobina, inclusive podendo ser uma normalmente aberta e outra normalmente fechada, tal como o relê da figura \ref{fig:fotoRele}.
+Uma grande utilidade dos relês vem do fato que a bobina de acionamento é eletricamente isolada dos cantatos, o que permite usar relês para:
+\begin{itemize}
+  \item Controle de alta tensão e/ou potência através de baixa tensão e/ou potência -- um sinal de mW pode comandar kW de potência através de um relê.
+  \item Isolação e proteção do circuito de controle.
+  \item Acionamento trifásico -- um contator é um relê com três conjuntos isolados de contatos acionados pela mesma bobina.
+  \item Implementação de lógica de controle -- são os chamados circuitos chaveados.
+\end{itemize}
+\section{De relês a CLPs}
 
-A parte de acionamento de um relê (a bobina) é eletricamente isolada do contato. Esta característica é interessante para separar o circuito de controle do circuito de acionamento, o que permite o acionamento de cargas de alta tensão e alta corrente a partir de um circuito de baixa tensão. Um exemplo de aplicação de relê é mostrado na figura \ref{fig:releCircuito1}, onde 2 relês c1 e c2 são usados para o acionamento de um motor trifásico em comandado pelas botoeiras b0, b1 e b2.
+Um exemplo de aplicação de relê é mostrado na figura \ref{fig:releCircuito1}, onde 2 relês c1 e c2 são usados para o acionamento de um motor trifásico comandado pelas botoeiras b0, b1 e b2.
 
 \begin{figure}[hbt]
   \begin{center}
