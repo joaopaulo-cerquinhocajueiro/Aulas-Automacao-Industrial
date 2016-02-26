@@ -52,11 +52,11 @@ O historiador do processo se comunica com vários sistemas do nível 1 (CLP, CNC
  	\item[Adequação a normas] como por exemplo para controle ambiental.
  	\item[Monitoração de equipamentos] para ontrole de vida útil e apoio à manutenção.
  	\item[Análise de processo] facilita a visualização de dados e detecção de correlações.
- \end{description}  			
+ \end{description}
 
 Os dados coletados são principalmente os valores das variáveis do processo, sejam discretos ou contínuos, mas também abarcam outras informações, tais como a ocorrência de alarmes, a marcação de que operador está presente, o período que um equipamento está ligado, entre outros. Cada uma desta isformações é identificada por um marcador único - a chamada \emph{tag}, ao qual também está associado o endereço lógico de onde se obtém tal informação e o tempo em que tal dado foi gerado (\emph{time stamp}). Em alguns casos se associa também uma métrica da qualidade do dado, referente a confiabilidade daquele dado, tal como se o instrumento de medida está calibrado ou não.
 
-Estas informações podem ser obtidas tanto de sistemas SCADA (nível 2) ou de CLPs (nível 1). Algumas vantagens de pegar informação dos sistemas nível 2 são que: 
+Estas informações podem ser obtidas tanto de sistemas SCADA (nível 2) ou de CLPs (nível 1). Algumas vantagens de pegar informação dos sistemas nível 2 são que:
 \begin{itemize}
 	\item o SCADA já converteu os dados para unidades de engenharia enquanto que em alguns CLPs os dados estão em valor bruto (de 0 a 4095);
 	\item muitas variáveis são definidas apenas no sistema SCADA, não existindo nos CLPs, tais como o motivo de alarmes ou qual operador está monitorando a operação;
@@ -127,7 +127,7 @@ Os sistemas MES agregam diversas funções de sistemas anteriores mais simples e
 		\includegraphics[width=0.8\textwidth]{figuras/kpi}
 	\end{center}
 	\caption{Exemplo de visualização de KPIs.}
-	\label{fig:figure1}
+	\label{fig:kpi}
 \end{figure}
 
 	O OEE -- \emph{Overall Equipment Effectiveness} é um exemplo de KPI não diretamente ligado ao produto, mas à produção. O OEE aponta a efetividade de um determinado equipamento ou célula de produção. Este índice é dado por:
