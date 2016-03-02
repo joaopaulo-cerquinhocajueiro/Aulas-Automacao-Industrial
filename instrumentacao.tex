@@ -174,6 +174,36 @@ Os principais princípios físicos para a medição de pressão ou força são:
   A fita extensiométrica é um resistor que varia a resistência com a tração ou compressão (efeito piezoresistivo). Ao ser colado ao elemento elástico, permite transformar a deformação deste elemento num sinal elétrico.
 
   \item[Piezoelétrico.] Baseiam-se no efeito apresentado por alguns cristais (normalmente se usa o quartzo) que geram um sinal elétrico ao serem submetidos a uma força e geram uma força quando lhe são aplicados sinais elétricos. Isto permite a construção de circuitos osciladores que variam a sua frequência de ressonância natural em função da força aplicada.
+
+\subsection{Temperatura}
+Entre as diversas maneiras de medir temperatura, destacam-se:
+\begin{description}
+  \item[Tubo capilar], também conhecido como termômetro líquido. Usa um líquido que ao sofrer expansão térmica ocupa um tubo capilar, que permite visualizar a temperatura. Bom para visualização mas não adequado para automação, por não sr fácil gerar um sinal elétrico a partir dele.
+
+  \item[$\DeltaV_{BE}$] -- pode-se usar dois transistores bipolares para gerar uma diferença de tensão ($\DeltaV_{BE}$) que é proporcional à temperatura absoluta (em Kelvin). É limitado à faixa de temperatura em que a eletrônica funciona: de aproximadamente \SI{-55}{\celsius} a \SI{120}{\celsius}.
+
+  O grande uso da eletrônica fez com que o custo deste tipo de dispositivo caísse bastante, principalmente quando integrado em algum outro circuito. É muito usado em termômetros digitais e no controle de temperatura de processadores de computador.
+
+  \item[Termopar] Pode-se determinar a energia necessária para retirar elétrons de um determinado camada, o que se chama de \emph{função trabalho} do material. Quando dois materiais diferentes se juntam, a diferença da função trabalho deles gera um potencial elétrico. Normalmente este potencial elétrico não é percebido pois ao se fazer um circuito fechado de diferentes materiais com todas as junções na mesma temperatura, estas diferenças acabam se anulando. Porém, se pegarmos dois fios condutores com diferentes funções trabalhos,unirmos uma ponta e colocarmos esta junção numa temperatura diferente, como num forno, por exemplo, aparece uma tensão que é função dos materiais usados e da diferença de temperatura. Este é o chamado efeito Seebeck:
+  \[
+E = (S_\mathrm{B} - S_\mathrm{A}) \cdot (T_2 - T_1),
+  \]
+  onde E é a tensão gerada, $S_\mathrm{A}$ e $S_\mathrm{B}$ são os coeficientes de Seebeck dos materiais A e B e $T_2$ e $T_1$ são as diferentes temperaturas.
+
+Logo o termopar mede a diferença de temperatura entre dois lugares e não a temperatura absoluta., precisando de um medidor auxiliar para medir a temperatura ambiente.
+
+Existem diversos tipos de termopar, formados por diferentes junções de metais. Há vários tipos padrões identificados por uma letra: J - ferro e constantan; K - Níquel-Cromo e Níquel-Alumínio; S - Platina e Ródio e Platina. Escolhe-se o tipo pela faixa de operação, precisão e custo.
+
+  \item[Termorresistor] utiliza a variação da resistência de um condutor com a temperatura. Usa um polinômio que relaciona a resistência com a temperatura, como:
+  \[
+R = R_0[1+a\cdot T+b\cdot T^2],
+  \]
+onde T é a temperatura em Celsius e $R_0$ é a resistência quando a temperatura é de \SI{0}{\celsius}.
+
+São usados metais inertes, tais como o níquel ou a platina. O nome do sensor é o símbolo do elemento químico usado seguido da resistência à \SI{0}{\celsius}: Pt100, Ni500, etc.
+  \item[Pirômetro] ou termômetro de infravermelho usa a chamada raiação do corpo negro para determinar a temperatura. Todo objeto emite fótons de comprimento de onda relacionado à temperatura do objeto. O pirômetro mede então o comprimento de onda destes fótons, permitindo a medição da temperatura à distância.
+
+  Apesar da praticidade ainda são bastante caros. Hoje se usa também as câmeras térmicas, baseadas no mesmo princípio.
 \end{description}
 
 \section{Transmissão de dados, aterramento e blindagem em instrumentação.}
