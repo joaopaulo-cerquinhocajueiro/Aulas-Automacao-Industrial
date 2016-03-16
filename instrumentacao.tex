@@ -207,4 +207,69 @@ São usados metais inertes, tais como o níquel ou a platina. O nome do sensor �
   Apesar da praticidade ainda são bastante caros. Hoje se usa também as câmeras térmicas, baseadas no mesmo princípio.
 \end{description}
 
+\section{Características dos Instrumentos}
+\label{sec:Características dos Instrumentos}
+
+Podemos separar entre características estáticas e dinâmicas. As principais características estáticas são:
+\begin{description}
+  \item[Sensibilidade - S] Relação entre um acréscimo na grandeza medida ($x$) e o acréscimo correspondente na saída do sensor ($Y$).
+  \[
+S = \frac{\partial y}{\partial x}
+  \]
+Se a curva é uma reta, a sensibilidade é constante. Além disso, se o 0 da entrada gera 0 na saída, pode ser chamado de ganho.
+\item[Faixa de Operação] Faixa de valores de entrada para a qual o dispositivo funciona. Também chamado de Faixa nominal.
+
+Algumas vezes, a Faixa é referida como sendo a diferença entre o valor máximo e mínimo do instrumento.
+\item[Faixa de Operação de Saída] Faixa de valores de saída gerados pelo dispositivo. Também chamado de Fundo de escala.
+
+Se o instrumento for linear, pode-se tirar a seensibilidade a partir da faixa de operação de entrada e de saída.
+\item[Resolução] Menor variação da entrada que gera uma variação na saída.
+
+Para instrumentos digitais, está relacionado ao número de bits do conversor analógico-digital usado.
+\item[Exatidão] O quanto o valor médio dado pelo instrumento corresponde ao valor real.
+\item[Precisão] O quanto as medições variam em torno do valor médio.
+\begin{figure}
+  \includegraphics[width=0.6\textwidth]{figuras/precisaoExatidao}
+  \caption{Representação de precisão e exatidão.a) Exato e Não Preciso. b) Exato e Preciso. c) Não Exato e Não Preciso. d) Não Exato e Preciso.}\label{fig:precisaoExatidao}
+\end{figure}
+\item[Repetibilidade] Capacidade do instrumento de reproduzir as mesmas saídas
+quando as mesmas entradas são aplicadas, sob as mesmas condições.
+É calculado como sendo a amplitude máxima observada nas medições de saída em relação à faixa de operação de saída.
+\[
+\text{Repetibilidade} = \frac{y_{max}-y{min}}{\text{Faixa de operação de saída}}
+\]
+\item[Reprodutibilidade] Grau de concordância entre os resultados das medições de uma mesma grandeza, onde as medições individuais são efetuadas variando-se uma ou mais das seguintes condições:
+\begin{itemize}
+  \item Método de medição.
+  \item Instrumento de medida.
+  \item Observador.
+  \item Outras variáveis (temperatura, pressão, etc.).
+\end{itemize}
+\item[Não linearidade] O quanto o instrumento diverge de uma relação linear entre entrada e saída.
+
+Normalmente é medido como a pior diferença entre a resposta do instrumento e a resposta linear.
+\item[Histerese] Quando há diferentes saídas para uma mesma entrada,
+conforme o valor da entrada for crescente ou decrescente.
+\begin{figure}
+  \includegraphics[width=0.6\textwidth]{figuras/histerese}
+  \caption{Representação de histerese.}\label{fig:histerese}
+\end{figure}
+\item[Banda morta] Região onde não existe variação na saída para uma
+determinada faixa de valores de entrada.
+\begin{figure}
+  \includegraphics[width=0.6\textwidth]{figuras/bandamorta}
+  \caption{Representação de banda morta.}\label{fig:bandaMorta}
+\end{figure}
+\end{description}
+
+A resposta dinâmica do instrumento é relacionada a variação da saída ao longo do tempo em função da variação da entrada. Os principais parâmetros são:
+\begin{description}
+  \item[Velocidade de resposta] Medida pelo tempo que o instrumento demora para variar em função de uma mudança em degrau da entrada.
+  \item[Atraso] O quanto o instrumento demora para fazer qualquer mudança após uma variação da entrada.
+  \item[\emph{Overshoot}] O quanto a medida passa do valor final ao ter uma alteração da entrada.
+  \item [Faixa de frequência] As frequências de entrada às quais o instrumento responde.
+  \item[Desvio] O quanto a saída muda ao longo do tempo, mesmo se a entrada estiver parada.
+\end{description}
+
+
 \section{Transmissão de dados, aterramento e blindagem em instrumentação.}
