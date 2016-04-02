@@ -1,0 +1,88 @@
+\chapter{CLPs -- Definições e termos comuns}
+
+A IEC61131, antes conhecida por IEC1131 é uma norma técnica do \emph{International Eletrotechnical Commission}, que define um padrão para CLPs. Esta norma define vários requisitos de hardware e software para os CLPs, desde aspectos de segurança até guias de uso.
+
+No CLP há um programa principal que executa a sequência mostrada na figura \ref{fig:seq_clp}. Em condições normais, o CLP fica num loop executando as seguintes operações:
+\begin{enumerate}
+  \item Lê as entradas, armazenando uma cópia das entradas em posições de memória.
+  \item Executa o código programado.
+  \item Atualiza as saídas, em função das entradas e do código do usuário.
+  \item Se comunica com outros dispositivos, se houverem. Estes outros dispositivos podem ser: computador, outro CLP, IHM, etc.
+  \item Faz um auto-teste.
+\end{enumerate}
+
+\begin{figure}[!h]
+  \centering
+  \begin{tikzpicture}[node distance = 2.0cm, auto]
+    \tikzstyle{block} = [rectangle, draw,% fill=blue!20,
+    text width=5.5em, text centered, rounded corners, minimum height=3em]
+    \tikzstyle{line} = [draw, -latex']
+
+
+    % Place nodes
+    \node [block] (init) {Inicialização};
+    \node [block, below of=init] (leitura) {Leitura das Entradas};
+    \node [block, below of=leitura] (exec) {Código Programado};
+    \node [block, below of=exec] (escrita) {Escrita das saídas};
+    \node [block, below of=escrita] (com) {Comunicação};
+    \node [block, below of=com] (teste) {Auto-teste};
+    \node [block, fill=red!20, right=2cm of teste] (erro) {Falha};
+
+    \path [line] (init) -- (leitura);
+    \path [line] (leitura) -- (exec);
+    \path [line] (exec) -- (escrita);
+    \path [line] (escrita) -- (com);
+    \path [line] (com) -- (teste);
+    \path [line] (teste) --node[above]{Erro} (erro);
+    \path [line] (teste) |- +(-2,-1) |- (leitura);
+
+
+  \end{tikzpicture}
+  \caption{Sequência do programa principal de um CLP.\label{fig:seq_clp}}
+\end{figure}
+
+A este loop se chama ciclo de execução, ciclo de \emph{scan} ou \emph{scan cycle}. O tempo que o CLP demora executando esta sequência é conhecido por \emph{scan time}. O ideal é que este tempo seja tão pequeno a ponto de poder ser desprezado em comparação aos tempos do processo. Neste contexto o código do usuário deve ser visto como tendo uma execução imediata. Obviamente isto não é verdade, já que o processador que executa este código é uma máquina de Turing -- que é inerentemente sequencial. Em processos simples, o \emph{scan time} pode ser da ordem de milissegundos ou dezenas de milissegundos, o que é bem rápido para uma grande quantidade de processos. Isto é especialmente importante quando se trabalha com a linguagem ladder, cuja estrutura remete a um circuito elétrico que é inerentemente paralelo, porém o \emph{scan time} depende do número de variáveis e do tamanho do código, podendo chegar a algumas centenas de milissegundos, onde a abstração de execução imediata pode deixar de funcionar.
+
+Há porém, mesmo em processos simples, situações em que é necessário que o CLP atue mais rápido que no tempo do \emph{scan time}, como por exemplo na leitura de um encoder, cujo sinal pode facilmente passar de kiloHertz. Para estes casos se usa um recurso dos microprocessadores e microcontroladores chamado interrupção, que permite interromper momentaneamente a execução do programa normal para executar uma tarefa mais prioritária, como por exemplo a leitura do encoder.
+
+Outro uso de interrupção é um recurso de segurança chamado \emph{watchdog timer}: um temporizador que é resetado uma vez a cada ciclo de execução. Se houver algum problema ou no código ou no hardware do microcontrolador que faça com que o ciclo de execução demore mais que o tempo ajustado no \emph{watchdog timer} (tipicamente da ordem de \SI{200}{\milli\second}), este causa uma interrupção que envia o CLP ao estado de Falha.
+
+CLPs mais modernos ainda permitem um outro modo de funcionamento, que permite aplicar redundância para aumentar a robustez do sistema de controle: colocam-se 2 CLPs ligados aos mesmos módulos de entrada e saída e com o mesmo programa gravado. Os dois executam o mesmo programa, só que apenas um deles aciona as saídas. Se este falhar, o segundo assume seu lugar sem interrupção do controle. A isto se chama \emph{hot swap}.
+
+\section{Variáveis}
+
+As variáveis dos CLPs e de seus módulos de controle são segmentaas de acordo com seu uso. Elas podem se referenciar a um valor dos seguintes tipos: entrada (I), saída (Q), memória interna (M) ou constante (K). O formato desta variável pode ser bit (X), byte (B) palavra de 16 bits, ou \emph{word} (W), palavra de 32 bits, \emph{double word} (D), de 64 bits, \emph{long word} (L),  ou número real em ponto flutuante (F). É possível -- e aconselhável -- definir símbolos que representem as memórias utilizadas num determinado programa, mas o símbolo deve apontar para uma memória descrita da seguinte forma:
+\begin{center}
+\textbf{\%\{tipo\}\{formato\}\{pos\}}
+\end{center}
+
+\textbf{pos} vem de posição, que pode ser simplesmente o endereço daquela variável dentro daquele segmento. Porém, ao se ter módulos, precisa-se colocar qual módulo está sendo endereçado, o que normalmente é feito pela posição do módulo no barramento (\emph{rack}) em que está montado. Neste caso é comum o \textbf{pos} ser da forma:
+\begin{center}
+\textbf{\{rack\}.\{módulo\}.\{canal\}}
+\end{center}
+
+Por exemplo:
+
+\begin{description}
+  \item[\%IX100] -- Bit de memória de entrada na posição 100.
+  \item[\%I100] -- Idem, pois para bit pode-se deixar o formato implícito.
+  \item[\%QW122] -- Word de memória de saída na posição 122.
+  \item[\%IW10.1.21] -- Word de memória de entrada no rack 10, módulo 1, canal 21.
+  \item[\%IX0.1.0] -- entrada binária 0 no módulo 1.
+\end{description}
+
+Obviamente, o módulo precisa ter fisicamente aquele tipo de varíavel para ser endereçado.
+
+\section{Programação}
+O código programado é definido pelo usuário e é composto por um conjunto de blocos em 5 possíveis linguagens, descritas na norma:
+\begin{description}
+  \item[IL -- Instruction List] Uma linguagem de baixo nível de abstração, parecida com assembly.
+  \item[ST -- Structured Text] Uma linguagem textual de alto nível, tal como C ou Pascal.
+  \item[LD -- Ladder] Baseado no diagrama de circuitos a relê.
+  \item[FBD -- Function Block Diagram] Parecido com um diagrama de portas lógicas: blocos com entradas e saídas.
+  \item[SFC -- Sequential Function Chart] Baseado em Grafcet, uma extensão de máquina de estados.
+\end{description}
+
+Os blocos podem ser independentes, e neste caso eles são executados um após o outro na sequência em que estão na memória, ou podem haver blocos de subrotinas, que são executados quando chamados por outro bloco. É possível ter um bloco de uma linguagem chamando blocos de outras linguagens, o que aumenta bastante o poder descritivo destas linguagens. Além disso as variáveis são geralmente globais e acessíveis de todos os blocos, em qualquer linguagem.
+
+Na prática, a maior parte da programação de um CLP é feita em Ladder, pois é a linguagem mais conhecidas pelos técnicos, responsáveis primeiros da manutenção dos equipamentos. Há também um grande uso de SFC devido a facilidade de usar esta linguagem para resolver problemas sequenciais. Além disso, o Grafcet (no qual é baseado o SFC) pode ser usado como uma ferramenta de desenvolvimento de um programa em ladder. Por conta disto este texto tratará principalmente destas duas linguagens. Porém antes será feita uma breve análise de Ladder e Instruction List, pois permite termos uma melhor ideia de como é o funcionamento interno de um CLP.

@@ -125,27 +125,6 @@ As entradas e saídas dos CLPs são isoladas eletricamente, uma vez que o microc
   \label{fig:ESclp}
 \end{figure}
 
-\section{IEC61131}
-A IEC61131, antes conhecida por IEC1131 é uma norma técnica do \emph{International Eletrotechnical Commission}, que define um padrão para CLPs. Esta norma define vários requisitos de hardware e software para os CLPs, desde aspectos de segurança até guias de uso.
-
-No CLP há um programa principal que continuamente executa a seguinte sequência:
-\begin{enumerate}
-  \item Faz um auto-teste.
-  \item Se comunica com outros dispositivos, se houverem. Estes outros dispositivos podem ser: computador, outro CLP, IHM, etc.
-  \item Lê as entradas, armazenando uma cópia das entradas em posições de memória.
-  \item Executa o(s) código(s) do usuário.
-  \item Atualiza as saídas, em função das entradas e do código do usuário.
-\end{enumerate}
-O código do usuário é composto por um conjunto de blocos em 5 possíveis linguagens, descritas na norma:
-\begin{description}
-  \item[IL -- Instruction List] Uma linguagem de baixo nível de abstração, parecida com assembly.
-  \item[ST -- Structured Text] Uma linguagem textual de alto nível, tal como C ou Pascal.
-  \item[LD -- Ladder] O mesmo diagrama de circuitos a relê.
-  \item[FBD -- Function Block Diagram] Parecido com um diagrama de portas lógicas: blocos com entradas e saídas.
-  \item[SFC -- Sequential Function Chart] Baseado em Grafcet, uma extensão de máquina de estados.
-\end{description}
-
-A idéia por trás desta estrutura é que o tempo que o CLP passe executando esta sequência (conhecido por \emph{scan time}) seja tão pequeno a ponto de poder ser desprezível. Neste contexto o código do usuário deve ser visto como tendo uma execução imediata. Obviamente isto não é verdade, já que o processador que executa este código é uma máquina de Turing -- que é inerentemente sequencial. Mas o \emph{scan time} pode ser da ordem de milissegundos ou dezenas de milissegundos, o que é bem rápido para uma grande quantidade de processos. Isto é especialmente importante quando se trabalha com a linguagem ladder, cuja estrutura remete a um circuito elétrico que é inerentemente paralelo.
 %Com este tipo de diagrama, fica fácil analisar a lógica por trás dos circuitos, o que fez com que este diagrama ainda seja usado, só que agora como uma linguagem gráfica de programação de CLPs.
 
 % \section{Mapas de Karnaugh}
@@ -170,7 +149,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 % \draw(3,1.2)node{\scriptsize{$\comp{a}b\comp{c}$}};
 %    \draw[pattern=north east lines](2,2.5)circle(1.2cm);
 % \draw(2,3.2)node{\scriptsize{$\comp{a}\comp{b}c$}};
-   
+
 %    \draw(2,1)node{\scriptsize{${a}{b}\comp{c}$}};
 %    \draw(1.2,2.5)node{\scriptsize{${a}\comp{b}{c}$}};
 %    \draw(2.8,2.5)node{\scriptsize{$\comp{a}{b}{c}$}};
@@ -204,13 +183,13 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 
 % \begin{figure}[!hbt]
 % 	\centering
-% %\subfloat{  
+% %\subfloat{
 % \begin{tikzpicture}[scale=1.3,every node/.style={rounded corners,fill=white}]
 %   \draw(0,0)rectangle(4,4);%\draw[step=1mm, red] (0,0) grid (4,4);
 %   \draw[rounded corners,pattern=north east lines](0.05,0.05)rectangle(3.95,2);
-%   \draw[rounded corners,pattern=north west lines](2,0.05)rectangle(3.95,3.95); 
+%   \draw[rounded corners,pattern=north west lines](2,0.05)rectangle(3.95,3.95);
 %   \draw[rounded corners,pattern=horizontal lines](0.05,1)rectangle(3.95,3);
-%   \draw[rounded corners,pattern=vertical lines](1,0.05)rectangle(3,3.95); 
+%   \draw[rounded corners,pattern=vertical lines](1,0.05)rectangle(3,3.95);
 % \kmin{\small{$\comp{a}\comp{b}\comp{c}\comp{d}$}}{\small{$\comp{a}\comp{b}\comp{c}{d}$}}{\small{$\comp{a}\comp{b}{c}\comp{d}$}}{\small{$\comp{a}\comp{b}{c}{d}$}}{\small{$\comp{a}{b}\comp{c}\comp{d}$}}{\small{$\comp{a}{b}\comp{c}{d}$}}{\small{$\comp{a}{b}{c}\comp{d}$}}{\small{$\comp{a}{b}{c}{d}$}} %Coloca os valores dos quadros menos significativos
 % \kmax{\small{${a}\comp{b}\comp{c}\comp{d}$}}{\small{${a}\comp{b}\comp{c}{d}$}}{\small{${a}\comp{b}{c}\comp{d}$}}{\small{${a}\comp{b}{c}{d}$}}{\small{${a}{b}\comp{c}\comp{d}$}}{\small{${a}{b}\comp{c}{d}$}}{\small{${a}{b}{c}\comp{d}$}}{\small{${a}{b}{c}{d}$}} %Coloca os valores dos quadros mais significativos
 % %\end{tikzpicture}}
@@ -222,9 +201,9 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %  \draw(4.1,1)--(4.1,2)node[right]{$b$}--(4.1,3);
 %  \draw(2,-0.1)--(3,-0.1)node[below]{$c$}--(4,-0.1);
 %  \draw(1,4.1)--(2,4.1)node[above]{$d$}--(3,4.1);
-%   \draw[rounded corners,](2,0.05)rectangle(3.95,3.95); 
+%   \draw[rounded corners,](2,0.05)rectangle(3.95,3.95);
 %   \draw[rounded corners,](0.05,1)rectangle(3.95,3);
-%   \draw[rounded corners,](1,0.05)rectangle(3,3.95); 
+%   \draw[rounded corners,](1,0.05)rectangle(3,3.95);
 % \kmin{\small{$\comp{a}\comp{b}\comp{c}\comp{d}$}}{\small{$\comp{a}\comp{b}\comp{c}{d}$}}{\small{$\comp{a}\comp{b}{c}\comp{d}$}}{\small{$\comp{a}\comp{b}{c}{d}$}}{\small{$\comp{a}{b}\comp{c}\comp{d}$}}{\small{$\comp{a}{b}\comp{c}{d}$}}{\small{$\comp{a}{b}{c}\comp{d}$}}{\small{$\comp{a}{b}{c}{d}$}} %Coloca os valores dos quadros menos significativos
 % \kmax{\small{${a}\comp{b}\comp{c}\comp{d}$}}{\small{${a}\comp{b}\comp{c}{d}$}}{\small{${a}\comp{b}{c}\comp{d}$}}{\small{${a}\comp{b}{c}{d}$}}{\small{${a}{b}\comp{c}\comp{d}$}}{\small{${a}{b}\comp{c}{d}$}}{\small{${a}{b}{c}\comp{d}$}}{\small{${a}{b}{c}{d}$}} %Coloca os valores dos quadros mais significativos
 %  \end{scope}
@@ -246,7 +225,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 % 	\label{fig:karnaugh_mintermos}
 % \end{figure}
 
-% Note na figura \ref{fig:karnaugh_mintermos} que os vizinhos de cada casa em um mapa de Karnaugh são tais que apenas muda uma variável de cada vez. Por exemplo, da casa 5 para a 1 (acima) só muda o $b$, da 5 para a 7 (direita) só muda o $c$, da 5 para a 4 (esquerda) só muda o $d$ e da 5 para a 13 (abaixo) só muda o $a$. 
+% Note na figura \ref{fig:karnaugh_mintermos} que os vizinhos de cada casa em um mapa de Karnaugh são tais que apenas muda uma variável de cada vez. Por exemplo, da casa 5 para a 1 (acima) só muda o $b$, da 5 para a 7 (direita) só muda o $c$, da 5 para a 4 (esquerda) só muda o $d$ e da 5 para a 13 (abaixo) só muda o $a$.
 
 % Isto que foi mostrado para a casa 5 é válido para todas casas, inclusive para as bordas e quinas, pois podemos considerar que o mapa dá a volta em si mesmo. Deste modo considera-se a casa 6 como vizinha da 4 e só muda a variável $c$, a casa 10 vizinha da 2 e só muda a variável $a$ e assim por diante.
 
@@ -255,7 +234,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 % \begin{figure}[hbt]
 % 	\centering
 %   \begin{tikzpicture}[scale=0.8]
-%     \node() at(0,4)[above left]{$f_2=\Sigma_m(3,7,12,13)$}; 
+%     \node() at(0,4)[above left]{$f_2=\Sigma_m(3,7,12,13)$};
 %    \karnaugh{$a$}{$b$}{$c$}{$d$} %Faz um mapa de Karnaugh de 0 a 4
 %    \kmin{0}{0}{0}{1}{0}{0}{0}{1} %Coloca os valores dos quadros menos significativos
 %    \kmax{0}{0}{0}{0}{1}{1}{0}{0} %Coloca os valores dos quadros mais significativos
@@ -287,7 +266,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %  f_3&=a\comp{c}
 % \end{align*}
 % 	\centering
-	
+
 % \begin{center}
 % %	\begin{tabular}[c]{cc}
 %   \begin{tikzpicture}[scale=0.8]
@@ -297,7 +276,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %    \kmax{1}{1}{0}{0}{1}{1}{0}{0} %Coloca os valores dos quadros mais significativos
 %    \grupo{0}{0}{2}{1}\node(p1)at (0.1,1.5){};
 %    \grupo{0}{1}{2}{2}\node(p1)at (0.1,1.5){};
-% %   \end{tikzpicture} %& 
+% %   \end{tikzpicture} %&
 % %		  \begin{tikzpicture}[scale=0.8]
 %    \node(seta) at (6,2){\Huge $\Rightarrow$};
 % 		\begin{scope}[xshift=8cm]
@@ -317,7 +296,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 % Este mesmo procedimento pode ser mostrado para agrupamentos de 8 casas (simplificando então 3 variáveis) ou 16 casas (simplificando 4 variáveis.
 % A figura \ref{fig:k_exemplos}\footnote{Exemplos retirados do artigo original de Karnaugh: ``\emph{The map method for synthesis of combinational logic circuits}'', de 1953.} mostra algumas possibilidades de agrupamentos de 2, 4 e 8 casas, junto com o produto respectivo. Num mapa de Karnaugh de 4 variáveis um agrupamento de 16 casas seria todo o mapa e corresponderia a função 1.
 
-% \begin{figure}[hbtp]\begin{center}% 
+% \begin{figure}[hbtp]\begin{center}%
 % \subfloat[agrupamentos de 2 casas]{
 %  \begin{tikzpicture}[scale=0.4]
 %    \draw(-0.1,4.1)node[above left]{$b\comp{c}d$};
@@ -326,7 +305,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %    \kmax{0}{0}{0}{0}{0}{1}{0}{0} %Coloca os valores dos quadros mais significativos
 %    \grupo[indefinido, rounded corners=1.5mm]{1}{1}{2}{3};
 % %   \quinas[indefinido, rounded corners=1.5mm]\node(p2)at (0.1,1.5){};
-% %   \end{tikzpicture} 
+% %   \end{tikzpicture}
 
 % \begin{scope}[xshift=6cm]
 %    \draw(-0.1,4.1)node[above left]{$\comp{a}\comp{b}d$};
@@ -335,7 +314,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %    \kmax{0}{0}{0}{0}{0}{0}{0}{0} %Coloca os valores dos quadros mais significativos
 %    \grupo[indefinido, rounded corners=1.5mm]{1}{3}{3}{4}\node(p1)at (0.1,1.5){};
 % %   \grupo[indefinido, rounded corners=1.5mm]{1}{0}{2}{4}\node(p2)at (0.1,1.5){};
-%    \end{scope} 
+%    \end{scope}
 % \begin{scope}[xshift=12cm]
 %    \draw(-0.1,4.1)node[above left]{$\comp{a}\comp{b}\comp{d}$};
 %    \karnaugh[0]{$a$}{$b$}{$c$}{$d$} %Faz um mapa de Karnaugh de 0 a 4
@@ -343,7 +322,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %    \kmax{0}{0}{0}{0}{0}{0}{0}{0} %Coloca os valores dos quadros mais significativos
 %    \lados[indefinido, rounded corners=1.5mm]{3}{4};
 
-%    \end{scope} 
+%    \end{scope}
 % \begin{scope}[xshift=18cm]
 %    \draw(-0.1,4.1)node[above left]{$\comp{b}\comp{c}\comp{d}$};
 %    \karnaugh[0]{$a$}{$b$}{$c$}{$d$} %Faz um mapa de Karnaugh de 0 a 4
@@ -354,14 +333,14 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %    \end{scope}
 % \end{tikzpicture}}
 % \subfloat[Agrupamentos de 4 casas]{
-%  \begin{tikzpicture}[scale=0.4] 
+%  \begin{tikzpicture}[scale=0.4]
 %  \begin{scope}
 %    \draw(-0.1,4.1)node[above left]{$\comp{c}d$};
 %    \karnaugh[0]{$a$}{$b$}{$c$}{$d$} %Faz um mapa de Karnaugh de 0 a 4
 %    \kmin{0}{1}{0}{0}{0}{1}{0}{0} %Coloca os valores dos quadros menos significativos
 %    \kmax{0}{1}{0}{0}{0}{1}{0}{0} %Coloca os valores dos quadros mais significativos
 %    \grupo[indefinido, rounded corners=1.5mm]{1}{0}{2}{4};
-  
+
 %  \begin{scope}[xshift=6cm]
 %    \draw(-0.1,4.1)node[above left]{$a\comp{b}$};
 %    \karnaugh[0]{$a$}{$b$}{$c$}{$d$} %Faz um mapa de Karnaugh de 0 a 4
@@ -383,17 +362,17 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %    \kmax{1}{0}{1}{0}{0}{0}{0}{0} %Coloca os valores dos quadros mais significativos
 %    \quinas[indefinido, rounded corners=1.5mm];
 %      \end{scope}
-%    \end{scope} 
+%    \end{scope}
 % \end{tikzpicture}}
 % \subfloat[Agrupamentos de 8 casas]{
-%  \begin{tikzpicture}[scale=0.4] 
+%  \begin{tikzpicture}[scale=0.4]
 %  \begin{scope}
 %    \draw(-0.1,4.1)node[above left]{$b$};
 %    \karnaugh[0]{$a$}{$b$}{$c$}{$d$} %Faz um mapa de Karnaugh de 0 a 4
 %    \kmin{0}{0}{0}{0}{1}{1}{1}{1} %Coloca os valores dos quadros menos significativos
 %    \kmax{0}{0}{0}{0}{1}{1}{1}{1} %Coloca os valores dos quadros mais significativos
 %    \grupo[indefinido, rounded corners=1.5mm]{0}{1}{4}{3};
-  
+
 %  \begin{scope}[xshift=6cm]
 %    \draw(-0.1,4.1)node[above left]{$\comp{d}$};
 %    \karnaugh[0]{$a$}{$b$}{$c$}{$d$} %Faz um mapa de Karnaugh de 0 a 4
@@ -415,7 +394,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %    \kmax{1}{1}{1}{1}{0}{0}{0}{0} %Coloca os valores dos quadros mais significativos
 %    \topos[indefinido, rounded corners=1.5mm]{0}{4};
 %      \end{scope}
-%    \end{scope} 
+%    \end{scope}
 %    \end{tikzpicture}}
 % \caption{Exemplos de mapas de karnaugh com os correspondentes produtos algébricos.}\label{fig:k_exemplos}
 % \end{center}
@@ -429,7 +408,7 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 % \begin{figure}[!h]
 % \centering
 % \subfloat[Mapa de 2 variáveis]{
-%  \begin{tikzpicture}[scale=0.7] 
+%  \begin{tikzpicture}[scale=0.7]
 % \draw[step=1cm, black] (0,0) grid (2,2); %defining grids
 %   \draw(-0.1,0)--(-0.1,0.5)node[left]{$a$}--(-0.1,1);
 %   \draw(1,-0.1)--(1.5,-0.1)node[below]{$b$}--(2,-0.1);
@@ -442,14 +421,14 @@ A idéia por trás desta estrutura é que o tempo que o CLP passe executando est
 %   \draw[<->](0.6,0.5)--(1.4,0.5);
 %  \end{tikzpicture}}
 % \subfloat[Mapa de 3 variáveis]{
-%  \begin{tikzpicture}[scale=0.7] 
+%  \begin{tikzpicture}[scale=0.7]
 %    \karnaughtres{$a$}{$b$}{$c$}
 %    \draw[<->](1.5,0.6)--(1.5,1.4);
 %    \draw[<->](0.6,0.5)--(1.4,0.5);
 %    \draw[<->](1.6,0.5)--(2.4,0.5);
 %  \end{tikzpicture}}
 % \subfloat[Mapa de 4 variáveis]{
-%  \begin{tikzpicture}[scale=0.7] 
+%  \begin{tikzpicture}[scale=0.7]
 %    \karnaugh[1]{$a$}{$b$}{$c$}{$d$} %Faz um mapa de Karnaugh de 0 a 4
 %    \draw[<->](1.5,2.6)--(1.5,3.4);
 %    \draw[<->](1.5,1.6)--(1.5,2.4);
