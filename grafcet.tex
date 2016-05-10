@@ -1,11 +1,14 @@
 %!TEX root = principal.tex
 \chapter{Linguagem grafcet}
 
-GRAphe Fonctionnel de Commande Etape/Transition - Grafo funcional de comando etapa/transição, é um formalismo matemático tal como uma máquina de estados. Tem origem na chamada máquina de estados, mas com mais funcionalidades, tais como a possibilidade de ter estados em paralelo e de ter macro-estados.
+GRAphe Fonctionnel de Commande Etape/Transition - Grafo funcional de comando etapa/transição, é um formalismo matemático tal como uma máquina de etapas. Tem origem na chamada máquina de etapas, mas com mais funcionalidades, tais como a possibilidade de ter etapas em paralelo e de ter macro-etapas.
 
-Um diagrama grafcet é composto dos seguintes elementos: estados, transições, ações, divergências e convergências E e divergências e convergências OU.
+Um diagrama grafcet é composto dos seguintes elementos: etapas, transições, ações, divergências e convergências E e divergências e convergências OU.
 
-O básico do grafcet é a sequência estado-transição-estado, como mostra na figura \ref{fig:grafcetSimples}. Ela apresenta um diagrama grafcet com 3 estados (os quadrados) e três transições (os retângulos verde e vermelhos). O estado 0 é o estado inicial, o que é indicado pela linha dupla, porém neste momento o estado ativo é o Estado 1, indicado pela ficha. As transições tem condições que, quando veradeiras, as ativam. Neste caso uma transição ativa é representada pela cor verde, enquanto uma inativa é representada pela cor vermelha.
+O básico do grafcet é a sequência etapa-transição-etapa, como mostra na figura \ref{fig:grafcetSimples}. Ela apresenta um diagrama grafcet com 3 etapas (os quadrados) e três transições (os retângulos verde e vermelhos). Etapas e transições podem estar ativas ou não. Etapas ativas são representadas com uma ficha dentro delas (vide Etapa 1 na figura), enquanto que transições ativas são em geral representadas por uma mudança de cor. Neste exemplo uma transição ativa é representada pela cor verde, enquanto uma inativa é representada pela cor vermelha.
+
+A ativação de uma transição é diretemente relacionada a uma condição lógica associada a mesma: quando veradeiras, as ativam. Já a ativação das etapas depende da dinâmica do sistema. No exemplo da figura \ref{fig:grafcetSimples}, A Etapa 0 é uma etapa inicial (representado pela linha dupla), significando que o sistema inicia com a Etapa 0 ativa, mas não as demais. No momento mostrado na figura \ref{fig:grafcetSimples}, a Etapa 1 é que está ativa, indicado pela ficha.
+
 \begin{figure}[hbt]
   \centering
   \includegraphics[scale=0.6]{figuras/grafcetSimples}
@@ -15,11 +18,11 @@ O básico do grafcet é a sequência estado-transição-estado, como mostra na f
 
 A evolução do sistema descrito em grafcet é dada pelo disparo das transições. Um transição dispara quando:
 \begin{itemize}
-  \item ela está ativa e
-  \item todos os estados anteriores a ela estão ativos.
+  \item ela está ativa (ou seja, a condição ligada a ela é verdadeira) e
+  \item todos as etapas anteriores a ela estão ativas.
 \end{itemize}
 
-Quando uma transição dispara ela desativa todos os estados anteriores a ela (os estados acima) e ativa todos os posteriores (os abaixo). Por exemplo, se na figura \ref{fig:grafcetSimples} a condição A se tornasse verdadeira, como o único estado anterior, o Estado 1 está ativo, esta transição dispararia, desativando Estado 1 e ativando Estado 2. Esta sequência é mostrada na figura \ref{fig:grafcetDisparo}.
+Quando uma transição dispara ela desativa todos os etapas anteriores a ela (as etapas acima) e ativa todos as posteriores (as abaixo). Por exemplo, se na figura \ref{fig:grafcetSimples} a condição A se tornasse verdadeira, como a única etapa anterior (a Etapa 1) está ativa, esta transição dispararia, desativando a Etapa 1 e ativando a Etapa 2. Esta sequência é mostrada na figura \ref{fig:grafcetDisparo}.
 \begin{figure}[hbt]
   \centering
   \includegraphics[scale=0.6]{figuras/grafcetDisparo}
@@ -29,7 +32,7 @@ Quando uma transição dispara ela desativa todos os estados anteriores a ela (o
 
 \section{Divergências e convergências}
 
-No grafcet, pode-se ter um estado com mais de uma transição de saída, que pode levar para estados diferentes de acordo com qual transição dispare primeiro. A isto se chama uma \emph{divergência OU}, pois separa em dois caminhos excludentes. Da mesma forma, duas (ou mais) transições podem levar para o mesmo estado, o que se chama de convergência OU. A figura \ref{fig:grafcetdivOU} mostra um exemplo em que o sistema pode evoluir por dois caminhos diferentes, com o uso de divergência e convergência OU.
+No grafcet, pode-se ter uma etapa com mais de uma transição de saída, que pode levar para etapas diferentes de acordo com qual transição dispare primeiro. A isto se chama uma \emph{divergência OU}, pois separa em dois caminhos excludentes. Da mesma forma, duas (ou mais) transições podem levar para o mesmo etapa, o que se chama de convergência OU. A figura \ref{fig:grafcetdivOU} mostra um exemplo em que o sistema pode evoluir por dois caminhos diferentes, com o uso de divergência e convergência OU.
 
 \begin{figure}[hbt]
   \centering
@@ -38,9 +41,9 @@ No grafcet, pode-se ter um estado com mais de uma transição de saída, que pod
   \label{fig:grafcetdivOU}
 \end{figure}
 
-Note-se na figura \ref{fig:grafcetdivOU} que o Estado 1 é obrigatoriamente transitório, pois ou A é verdadeiro e o sistema evolui imediatamente para o Estado 2 ou A é falso e o sistema ativa o Estado 3. É possível definir transições que estejam ativas ao mesmo tempo, neste caso o sistema evolui para a transição com maior prioridade -- ou a mais a esquerda ou se tiver uma prioridade explícita.
+Note-se na figura \ref{fig:grafcetdivOU} que a Etapa 1 é obrigatoriamente transitória, pois ou A é verdadeiro e o sistema evolui imediatamente para o etapa 2 ou A é falso e o sistema ativa o etapa 3. É possível definir transições que estejam ativas ao mesmo tempo, neste caso o sistema evolui para a transição com maior prioridade -- ou a mais a esquerda ou se tiver uma prioridade explícita.
 
-Diferente de uma máquina de estados, no grafcet é permitido que uma transição acione mais que um estado. Neste caso o sistema se divide em caminhos paralelos. Isto é chamado de divergência E e indicado por duas linhas horizontais, para diferenciar da divergência OU. Da mesma forma, uma convergência E liga vários estágios a uma única transição, transformando caminhos paralelos num único caminho. A figura \ref{fig:grafcetdivE} mostra um exemplo de divergência e convergência E.
+Diferente de uma máquina de estados, no grafcet é permitido que uma transição acione mais que uma etapa. Neste caso o sistema se divide em caminhos paralelos. Isto é chamado de divergência E e indicado por duas linhas horizontais, para diferenciar da divergência OU. Da mesma forma, uma convergência E liga várias etapas a uma única transição, transformando caminhos paralelos num único caminho. A figura \ref{fig:grafcetdivE} mostra um exemplo de divergência e convergência E.
 
 \begin{figure}[hbt]
   \centering
@@ -49,23 +52,29 @@ Diferente de uma máquina de estados, no grafcet é permitido que uma transiçã
   \label{fig:grafcetdivE}
 \end{figure}
 
-Note que, neste caso, mesmo com P ativo, o sistema não desativa o Estado 2a nem ativa Estado 0, pois como o Estado 2b não está ativo, a transição P não pode disparar.
+Neste caso, mesmo com P ativo, o sistema não desativa a Etapa 2a nem ativa a Etapa 0, pois como a Etapa 2b não está ativa, a transição P não pode disparar.
 
 \section{Ações}
-Outra característica do grafcet é que podem ser definidas ações, ligadas a estados. O que exatamente compõem uma ação depende da implementação do grafcet. Peguemos dois exemplos: o JGrafchart e a SFC, que é a descrição de grafcet definida pela norma IEC61131.
+Outra característica do grafcet é que podem ser definidas ações, ligadas a etapas. O que exatamente compõem uma ação depende da implementação do grafcet. Peguemos dois exemplos: o JGrafchart e a SFC, que é a descrição de grafcet definida pela norma IEC61131.
 
-No JGrafchart, uma ação pode ser uma definição de valor (um \emph{assignment}), da forma \lstinline|variavel = expressao|, uma chamada de subrotina (\emph{call}) ou uma variável booleana (\emph{bool}), que fica verdadeira enquanto o estado estiver ativo. Um qualificador de uma letra define o momento em que a ação é executada:
+\subsection{JGrafchart}
+\label{sub:JGrafchart}
+
+No JGrafchart, uma ação pode ser uma definição de valor (um \emph{assignment}), da forma \lstinline|variavel = expressao|, uma chamada de subrotina (\emph{call}) ou uma variável booleana (\emph{bool}), que fica verdadeira enquanto a etapa estiver ativa. Um qualificador de uma letra define o momento em que a ação é executada:
 \begin{description}
   \item[S assignment|call;] Executa apenas uma vez, quando a etapa é ativada.
   \item[X assignment|call;] Executa apenas uma vez, quando a etapa é desativada.
   \item[P assignment|call;] Executa a cada ciclo enquanto a ação estiver acionada.
-  \item[N bool;] Aciona a variável booleana enquanto a etapa estiver acionada.
+  \item[N bool;] Torna verdadeira a variável booleana enquanto a etapa estiver acionada.
   \item[A assignment|call;] Executa apenas uma vez, se a etapa for desativada por uma transição de exceção (apenas definida no JGrafchart).
 \end{description}
 
-Note-se que a ação \lstinline/N bool;/ é equivalente a \lstinline/P bool=1;/ e é presente para facilitar a escrita, já que tal operação é feita muitas vezes.
+Note-se que a ação \lstinline/N bool;/ é equivalente a \lstinline/S bool=1; X bool=0;/ e é presente para facilitar a escrita, já que tal operação é feita muitas vezes.
 
-Toda etapa tem uma variável booleana x (\lstinline|<nome_da_etapa>.x|), que aciona quando a etapa é acionada, e uma variável de tempo em décimos de segundo t (\lstinline|<nome_da_etapa>.t|) e em segundos s (\lstinline|<nome_da_etapa>.s|).
+Toda etapa tem uma variável booleana x (\lstinline|<nome_da_etapa>.x|), que é verdadeira quando a etapa é acionada, e uma variável de tempo em décimos de segundo t (\lstinline|<nome_da_etapa>.t|) e em segundos s (\lstinline|<nome_da_etapa>.s|) que contam o tempo desde que a etapa iniciou.
+
+\subsection{SFC}
+\label{sub:SFC}
 
 As ações do SFC são do formato \textbf{\lstinline/qualificador funcao|variavel finalizado/}. \lstinline|finalizado| é uma variável opcional no caso de se usar uma função, que aciona quando a função termina, o que a torna útil para ser utilizada na transição de saída da etapa.
 
@@ -449,4 +458,3 @@ Então com base nos sensores e atuadores presentes, podemos fazer o grafcet nív
 \caption{Diagrama grafcet nível 2 para cozinhar um ovo.}
 \label{fig:grafcetOvo2}
 \end{figure}
-
