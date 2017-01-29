@@ -79,86 +79,100 @@ Tipicamente se tem um sinótico geral para uma planta, do qual se podem abrir si
 \end{figure}
 
 
-\subsection{Representação no sinótico}
-\label{sub:Representação no sinótico}
-Texto
-Exibe valor de engenharia da variável analógica. A cor do texto pode servir
-para codificar o status da variável.
-• Barras horizontais e verticais
-Fornecem uma representação percentual do valor da variável. Podem ser
-utilizados para mostrar o enchimento de um silo, tanque, reator, etc.
-• Deslocamento vertical, horizontal
-Rotação
-Efetua a rotação de um objeto: forno rotativo de cimento, pás de um
-ventilador, etc associando 0° ao valor 0% da variáve l e 360° ao valor de
-100%.
-• Tendência
-Exibe o gráfico dos últimos valores da variável em função do tempo.
-• Mostradores Circulares
-
-a) Texto
-Exibe o status da variável: ABERTO/FECHADO ou LOCAL/REMOTO ou
-LIGADO/DESLIGADO. Para cada estado é possível definir a cor de
-apresentação do texto.
-b) Associação a cor (ou outro atributo) de um objeto:
-A cor do objeto muda de acordo com o status da variável associada.
-c) Associação a um par de objetos complementares
-Os dois objetos ocupam fisicamente a mesma posição no sinótico. Quando
-a variável está em 0 o objeto chave aberta, por exemplo, é exibido, quando
-está em 1 a chave é mostrada na posição fechada.
-
 \subsection{Requisitos}
 \label{sub:Requisitos}
-Ao projetar uma IHM o projetista deve ter em mente:
-a) Diminuir a chance de erro do operador principalmente nos
-momentos de maior demanda operacional que coincide com o aumento
-do stress:
-b) Evitar as situações de monotonia que levam à desconcentração do
-operador. Sinóticos pouco representativos do processo e sem atrações
-de animação ou com muitos dados tabulares levem ao desinteresse.
-c) Evitar situações que acarretam cansaço.
-d) Manter o operador sempre atento ao que realmente interessa.
-Evitar excesso de informações na tela. Sinóticos muito cheios trazem
-excesso de informações que o operador não é capaz de processar. Os
-alarmes e informações devem obedecer ao critério da exceção.
-Avalanches de alarmes devem ser evitadas.
-e) Evitar consulta a referências externas ao sistema. Se o operador
-tiver dúvidas quanto a operação de elementos do sistema deverá
-consultar o próprio sistema (Help on-line).
 
-Conceitos ergonômicos para a construção de sinóticos :
-• Os olhos tendem a se mover de:
-Uma imagem grande para uma menor
-Uma cor saturada para uma não saturada
-Uma cor brilhante para um cor pastel
-Uma imagem colorida para outra monocromática
-Formas simétricas para formas assimétricas
-Algo que se move e pisca para uma imagem estática.
+O projeto de um sinótico é bastante complexo e foge um tanto das competências típicas de um engenheiro. Ao projetar uma IHM o projetista deve trabalhar com vários requisitos ergonômicos e de comportamento humano, procurando:
 
-A construção do sinóptico deve ser bem balanceada: o número de
-elementos de informação por tela deve ser coerente com a capacidade
-humana de interpretá-los. Evitar sinóticos congestionados ou vazios
-demais.
-• Representação gráfica dinâmica (animações).
-• Evite objetos grandes piscantes
-• Deve haver redundância na forma de representar uma informação:
-valor, barras, enchimentos, etc. A representação mais natural é a mais
-indicada. Por exemplo, enchimento para tanques e silos, rotação para um
+\begin{itemize}
+	\item Diminuir a chance de erro do operador, principalmente nos
+	momentos de maior demanda operacional, coincidentes com o aumento
+	do stress.
+	\item Evitar as situações de monotonia que levam à desconcentração do
+	operador. Sinóticos pouco representativos do processo e sem atrações
+	de animação ou com muitos dados tabulares levem ao desinteresse.
+	\item Evitar situações que acarretam cansaço.
+	\item Manter o operador sempre atento ao que realmente interessa. Sinóticos muito cheios trazem
+	excesso de informações que o operador não é capaz de processar. Os
+	alarmes e informações devem ser mostrados apenas em casos de exceção para evitar avalanches de alarmes.
+	\item Evitar consulta a referências externas ao sistema. Se necessário, o operador deve poder	tirar dúvidas quanto a operação do sistema no próprio SCADA.
+
+\end{itemize}
+
+Estudos ergonômicos voltados para a atenção de pessoas a IHMs mostram que os olhos tendem a se focar primeiro em uma imagem grande ao invés de uma pequena, em cores mais saturadas (brilhantes), em formas simétricas ao invés de formas assimétricas e em algo que se move e pisca em contraponto a uma imagem estática. Estes conhecimentos devem ser utilizados para a construção do sinóptico bem balanceado.
+
+
+São bons costumes em um sinótico:
+\begin{itemize}
+	\item Utilizar representação gráfica dinâmica (animações) para evitar a monotonia, mas.
+	\item Evitar objetos grandes piscantes, que cansam e distraem.
+	\item Representar equipamentos por desenhos de acordo com sua forma e
+	tamanhos reais, porém a representação fotográfica com excesso de
+	detalhes, sombra, etc. é desaconselhável.
+	\item Deixar o mais óbvio e intuitivo possível a seqüência para ligar ou desligar equipamentos ou realizar ações
+	de controle similares. Deve-se utilizar de metáforas visuais com equipamentos físicos.
+	\item Utilizar mensagens devem ser claras, explícitas e auto suficientes. Um contra
+	%exemplo: ``Erro 46A: Execute o procedimento de emergência 78´´.
+
+\end{itemize}
+
+Um determinado valor pode ser mostrado num sinótico de diversas formas. As mais comuns são:
+\begin{description}
+	\item[Texto] -- Para uma variável analógica, exibe seu valor em unidades de engenharia. A cor do texto pode servir
+	para codificar o status da variável (por exemplo, se valor muito alto ou muito baixo). Para um variável binária é comum atribuir o significado: ABERTO/FECHADO, LOCAL/REMOTO ou
+	LIGADO/DESLIGADO.
+	\item[Barras horizontais e verticais] -- Fornecem uma representação percentual do valor da variável. Podem ser utilizados para mostrar o enchimento de um silo, tanque, reator, etc.
+	\item[Deslocamento e rotação] --  Podem ser pelo valor de uma variável analógica ou relacionados a valores discretos, tais como sensores de fim de curso, por exemplo.
+	\item[Mostradores Circulares] -- Evocam os mostradores de ponteiro de instrumentos indicadores analógicos.
+	\item[Tendência] -- Exibe o gráfico dos últimos valores da variável em função do tempo.
+	\item[Associação a cor (ou outro atributo) de um objeto] -- A cor do objeto muda de acordo com o status da variável associada.
+	\item[Associação a um par de objetos complementares] -- Os dois objetos ocupam fisicamente a mesma posição no sinótico. Quando
+	a variável está em 0 o objeto chave aberta, por exemplo, é exibido, quando está em 1 a chave é mostrada na posição fechada.
+\end{description}
+
+Deve-se sempre buscar a representação mais natural para cada variável. Por exemplo, enchimento para tanques e silos, rotação para um
 forno de cimento ou britador de martelos, etc.
 
-• Equipamentos devem ser desenhados de acordo com sua forma e
-tamanhos exatos. A representação fotográfica com excesso de
-detalhes, sombra, etc. é desaconselhável.
-• A seqüência para ligar ou desligar equipamentos ou realizar ações
-de controle similares deve ser simples e intuitiva. Simplesmente
-selecione o objeto com o mouse e selecione a opção LIGA no menu.
-IHMs de alguns terminais bancários são um bom contra exemplo.
-• Mensagens devem ser claras, explícitas e auto suficientes. Contra
-exemplo: Erro 46A: Execute o procedimento de emergência 78
 
 \section{Alarmes e Eventos}
 \label{sec:Alarmes e Eventos}
+Outra função do SCADA é mostrar e armazenar todos os eventos significativos que ocorreram no processo, que são classificados em simples eventos a serem registrados (por exemplo: troca de operador, fim de fabricação de lote, etc) e alarmes, que são situações indesejadas e que requerem ações corretivas.
 
+Os alarmes são classificados por prioridade, definida por dois fatores: severidade das consequências e tempo requerido para tomar ações corretivas. Tipicamente os sistemas SCADA usam uma classificação numérica para a prioridade dos alarmes, mas uma classificação mais intuitiva é a de prioridade baixa, média, alta e crítica. Tome-se por exemplo o sinal de temperatura de um forno. Para um determinado processo, pode-se considerar que:
+\begin{itemize}
+	\item Uma temperatura baixa (L) durante a operação do forno indica um problema no controle, mas que a princípio não causará dano imediato. Atribui-se um alarme de baixa prioridade a este evento.
+	\item Uma temperatura muito baixa (LL) indica que o processo já não mais funcionará e talvez vá se perder aquele lote. Atribui-se um alarme de prioridade média.
+	\item Uma temperatura alta (H) já indica perda de material e pode levar a problemas piores se não for corrigido rápido. Atribui-se um alarme de alta prioridade.
+	\item Uma temperatura muito alta (HH) já é um risco iminente de incêndio. Atribui-se um alarme de prioridade crítica.
+\end{itemize}
+
+Estes alarmes e eventos podem ser definidos no próprio SCADA ou no CLP, enviados ao SCADA como uma variável booleana.
+
+Um alarme deve ser mostrado no painel de controle do SCADA para chamar atenção do operador. A partir do momento que um alarme ocorre, ele precisa ser normalizado (a situação que o gerou deve ser corrigida, seja por atuação do operador ou pelo controle automático do processo) e o operador precisa marcar no supervisório que identificou o alarme (chama-se reconhecer o alarme). A ideia por trás disso é que uma vez que o operador reconheceu o alarme, o supervisório não mais precisa ficar chamando a atenção do operador para aquele problema.
+
+Com base nisto, pode-se apresentar o alarme na tela da seguinte forma (entre outras possibilidades):
+\begin{description}
+	\item[\textcolor{red}{Vermelho Piscante}] Alarme não reconhecido.
+	\item[\textcolor{red}{Vermelho}] Alarme já reconhecido.
+	\item[\textcolor{yellow}{Amarelo}] Normalizado e não reconhecido.
+	\item[\textcolor{green}{Verde}] Normalizado e reconhecido.
+\end{description}
+
+Os alarmes e eventos são armazenados em uma base de dados com os seguintes dados:
+\begin{itemize}
+	\item Alarme ou evento disparado
+	\item Valor no momento do alarme
+	\item Descrição do evento
+	\item Data e hora do evento
+\end{itemize}
+
+A normalização ou reconhecimento de um alarme conta como eventos que também são armazenados nesta base de dados.
+
+Esta base de dados pode ser consultada no próprio SCADA, pode ser inserida num relatório automático e/ou enviada para sistemas acima na pirâmide automação.
 
 \section{Arquitetura de Hardware e Software}
 \label{sec:Arquitetura de Hardware e Software}
+
+Sistemas SCADA modernos dependem bastante da estrutura da rede de computadores. Estes sistemas permitem dividir as tarefas do SCADA em vários computadores: Um servidor de entrada e saída, para comunicação com os CLPs, um servidor de banco de dados, para armazenar e distribuir os dados obtidos, um gerenciador de alarmes e várias estações de acesso, que permitem acessar o sistema de vários pontos.  Cada um destes sistemas pode, além disto, ter uma redundância, de modo que se um computador falhar outro assume na mesma hora, sem perda de funcionalidade. Ao mesmo tempo, para sistemas simples ainda é possível ter todas estas funções rodando em um único computador.
+
+Cada vez mais comum é ter um servidor web, que permite disponibilizar toda a ferramenta SCADA num navegador de internet. Para tanto deve-se ter um cuidado com o acesso a esta rede, o que normalmente é feito através de VPNs - \emph{Virtual Private Networks}, que criam uma rede privada virtual sobre a internet usando criptografia para prevenir acessos indesejados.
