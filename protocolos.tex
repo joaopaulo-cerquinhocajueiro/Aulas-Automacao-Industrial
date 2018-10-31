@@ -1,17 +1,19 @@
 \section{Protocolos Industriais}
 
+Existem vários protocolos de comunicação industrial para diferentes aplicações.
+
 \begin{table}[h]
     \caption{Resumos de protocolos de redes industriais}\label{tab:protocolos}
-    \begin{tabular}{l|cccl}
+    \begin{tabular}{l|cp{20mm}p{20mm}p{35mm}}
         \hline
-        Protocolo & ano & taxa de transmissão & número de pontos & características\\
+        Protocolo & ano & velocidade & número de pontos & características\\
         \hline
-        Modbus RTU & 1979 & \~1~Mbps & 254 & Mestre escravo. Roda sobre RS432 ou RS485\\
-        Modbus TCP & 19 & definido pela rede & ilimitado & Mestre escravo. Roda sobre TCP-IP\\
+        Modbus RTU & 1979 & $\sim$1~Mbps & 254 & Mestre escravo. Roda sobre RS432 ou RS485\\
+        Modbus TCP & - & definido pela rede & ilimitado & Mestre escravo. Roda sobre TCP-IP\\
+        HART & 1986 & & 15 & Definido como um sinal digital sobre um sinal 4-20 mA.\\
         CAN & 1987 & & indefinido & Provedor-. Acesso por CSMA-CD.\\
-        HART & 1986 & & 15 & Definido como um sinal sobre um sinal 4-20 mA.\\
+        Profibus DP & 1989 & 12~Mbps & 126 & \\
         AS-i & 1994 & & 62 & Comunicação e alimentação sobre apenas 2 fios.\\
-        Profibus & 1989 & & & \\
         EtherCAT & 2003 & & & \\
         OPC-UA & 2006 & & & \\
         \hline
