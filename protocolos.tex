@@ -1,6 +1,19 @@
 \section{Protocolos Industriais}
 
-Existem vários protocolos de comunicação industrial para diferentes aplicações.
+Existem vários protocolos de comunicação industrial para diferentes aplicações. Dentre estes, podemos destacar 3 tipos de aplicação mais comuns:
+\begin{enumerate}
+    \item \label{it:0_1}Comunicação entre CLP e sensores e atuadores simples (nível 1 e nível 0).
+    \item \label{it:1_2}Comunicação entre elementos do nível 1 (CLPs, CNCs, inversores, servomotores) e destes com supervisórios (nível 2).
+    \item \label{it:2_3}Comunicação entre supervisórios e sistemas de gerência (nível 2 e nível 3).
+\end{enumerate}
+
+Redes de comunicação do tipo \ref{it:0_1} normalmente conectam um elevado número de dispositivos e requerem pequenos atrasos na comunicação, embora transmitam uma pequena quantidade de dados. Isto implica em um hardware simplificado, para permitir seu uso numa maior quantidade de dispositivos, e um protocolo determinístico, que permita controlar finamente o momento de aquisição de dados. Isto normalmente é conseguido usando uma camada física e de enlace própria da rede, tais como em redes Modbus RTU, HART, CAN, e AS-i.
+
+Comunicações do tipo \ref{it:1_2} tem as mesmas características de requerer pequenos atrasos, mas acoplada a uma quantidade de dados bem maior, como por exemplo num robô industrial, em que se transmita a posição de cada um de seus eixos. Isto pode ser obtido com uma camada física e de enlace própria, como na Profibus DP, o que é custoso, tanto em termos de desenvolvimento quanto implementação, ou pela aplicação de uma camada ethernet como base da rede, como nas redes Modbus TCP, Profinet e EtherCAT.
+
+Já comunicações do tipo \ref{it:2_3} são normalmente entre computadores e aí o uso delas sobre internet já é bem mais comum, como no caso de OPC-UA.
+
+A tabela \ref{tab:protocolos} lista algumas características destes protocolos de redes industriais, para facilitar a comparação entre eles.
 
 \begin{table}[h]
     \caption{Resumos de protocolos de redes industriais}\label{tab:protocolos}
@@ -19,4 +32,31 @@ Existem vários protocolos de comunicação industrial para diferentes aplicaç�
         \hline
     \end{tabular}
 \end{table}
+
+\subsection{Modbus}
+
+
+
+\subsection{HART}
+
+
+
+\subsection{CAN}
+
+
+
+\subsection{Profibus DP}
+
+
+
+\subsection{AS-i}
+
+
+
+\subsection{EtherCAT}
+
+
+
+\subsection{OPC-UA}
+
 
