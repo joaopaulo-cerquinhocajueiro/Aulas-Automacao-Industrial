@@ -35,14 +35,66 @@ A tabela \ref{tab:protocolos} lista algumas características destes protocolos d
 
 \subsection{Modbus}
 
+O protocolo Modbus foi criado em 1979 e a princípio independe das camadas físicas e de enlace, definindo um pacote de transmissão da camada de transporte. Isto permite que se estabeleça uma rede Modbus com comunicação serial, sobre inernet, usando links de rádio ou até mesmo através de mensagens SMS.
 
+Na prática, existem duas versões mais comuns de Modbus: Modbus RTU, que utiliza uma conexão serial como RS485, RS432 ou RS422, e Modbus TCP, que se conecta pelo protocolo TCP/IP.
+
+A comunicação Modbus é feita através de pacotes, que se diferenciam entre a versão RTU e TCP, como pode ser visto nas tabelas \ref{tab:mbrtu} e \ref{tab:mbtcp}.
+
+\begin{table}
+    \centering
+    \caption{Pacote Modbus RTU.}\label{tab:mbrtu}
+    \begin{tabular}{r|c|c|c|c|c|c|}
+        \cline{2-7}
+        \textbf{Campo:} & início & endereço & função & dados & CRC & fim\\
+        \cline{2-7}
+        \textbf{\# bytes:} & 3,5 & 1 & 1 & $n$ & 1 & 3,5 \\
+        \cline{2-7}
+    \end{tabular}
+\end{table}
+
+No modbus RTU, os campos de início e fim na verdade indicam um tempo mínimo em que o canal deve ficar em silêncio. O endereço é o endereço de cada dispositivo, onde o mestre é o zero e podem ter até 254 escravos, dependendo das restrições da camada inferior. A função é o comando que está sendo dado pelo mestre ou respondido pelo escravo e a quantidade de dados depende justamente desta função. O CRC é \emph{Cyclical Redundancy Check}, um código de detecção de erros.
+
+\begin{table}
+    \centering
+    \caption{Pacote Modbus TCP.}\label{tab:mbtcp}
+    \begin{tabular}{r|c|c|c|c|c|c|}
+        \cline{2-7}
+        \textbf{Campo:} & ID de & ID de & tamanho & endereço & função & dados \\
+         & transação & protocolo & pacote &  &  &  \\
+        \cline{2-7}
+        \textbf{\# bytes:} & 2 & 2 & 2 & 1 & 1 & $n$ \\
+        \cline{2-7}
+    \end{tabular}
+\end{table}
+
+No Modbus TCP, manda-se o pacote por TCP/IP, pela porta 502. O ID de transação define que pedaço da comunicação está sendo efetuado (0 para pedido de leitura, 1 para a resposta, etc.) e o ID de protocolo indica o protocolo que está sendo usado (valor é 2). O endereço é em geral ignorado, pois se usa diretamente o IP, e não se tem nem campos de início, fim ou CRC, que já são implementados na pilha TCP/IP.
+
+O Modbus define 4 tipos de dados: \textbf{entradas discretas} ou \textbf{discrete inputs}, que são binários apenas de leitura; \textbf{bobinas} ou \textbf{coils}, binários de escrita e leitura; \textbf{registradores de entrada} ou \textbf{input registers}, que são \emph{words} de 16 bits de leitura e \textbf{holding registers}, de 16 bits e de leitura e escrita. Com base nestes tipos, as funções disponíveis mais comuns são:
+\begin{description}
+    \item[1] -- ler bobinas.
+    \item[2] -- ler entradas discretas.
+    \item[3] -- ler registradores holding.
+    \item[4] -- ler registradores de entrada.
+    \item[5] -- escrever numa única bobina.
+    \item[6] -- escrever num único registrador holding.
+    \item[15] -- escrever em múltiplas bobinas.
+    \item[16] --  escrever em múltiplos registradores holding.
+\end{description}
 
 \subsection{HART}
+HART é a sigla para \emph{Highway Addressable Remote Transducer}. Tem como principal característica ser um sinal digital enviado sobre um sinal analógico de 4 a \SI{20}{mA}. Tem seu uso como um protocolo ponto-a-ponto quando usado com esta característica, onde um tipo de sinal fica sendo transmitido de forma analógica enquanto outros, tais como outras medições, parâmetros do sensor ou sinais de calibração, são transmitidos de forma digital.
 
+Um outro uso é efetivamente como rede, fazendo uma ligação em paralelo (\emph{multi-drop}) de vários dispositivos, alimentados através da corrente do loop, que neste caso fica fixa em \SI{4}{mA}. Dependendo da versão do protocolo, é possível conectar até 15 ou 64 dispositivos.
 
+Como o HART manda o sinal digital sobre o de 4 a 20 mA, ele não pode definr 0 e 1 como uma grande diferença de tensão. Além disso, precisa de alguma forma enviar o dado serial sem o uso de um sinal de clock. Isto é conseguido usando a modulação FSK -- \emph{Frequency Shift Keying}, onde o bit 0 é transmitido como um sinal alternado de baixa amplitude (\SI{0,5}{mA}) com frequência \SI{2200}{Hz} e o 1 como um sinal da mesma amplitude na frequência \SI{1200}{Hz}.
+
+É um protocolo mestre-escravo, tendo uma taxa de transmissão pequena, capaz de 2 mensagens por segundo. Pode também ser configurado peo mestre para usar um modo burst, onde o escravo fica mandando dados continuamente, a uma taxa de 3 mensagens por segundo.
+
+Assim como no Modbus, usa um endereço para definir o escravo com que deseja se comunicar e um campo de comando, equivalente ao de função do Modbus. Tem alguns comandos HART que são aceitos por todo dispositivo HART, outro conjunto de \emph{best practices} que é implementado pela maioria dos dispositivos e pode ainda ter comandos específicos para determinado disppositivo.
 
 \subsection{CAN}
-
+Originalmente significava \emph{Car Area Network}, pois foi criado pela Bosch para fazer uma rede de sensores dentro de um carro. Atualmente tem seu uso em redes de sensores industriais, servindo de base para outros protocolos, tais como o DeviceNet.
 
 
 \subsection{Profibus DP}
