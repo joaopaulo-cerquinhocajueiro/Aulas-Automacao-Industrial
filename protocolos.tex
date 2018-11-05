@@ -24,7 +24,7 @@ A tabela \ref{tab:protocolos} lista algumas características destes protocolos d
         Modbus RTU & 1979 & $\sim$1~Mbps & 254 & Mestre escravo. Roda sobre RS432 ou RS485\\
         Modbus TCP & - & definido pela rede & ilimitado & Mestre escravo. Roda sobre TCP-IP\\
         HART & 1986 & & 15 & Definido como um sinal digital sobre um sinal 4-20 mA.\\
-        CAN & 1987 & & indefinido & Provedor-. Acesso por CSMA-CD.\\
+        CAN & 1987 & 512/128 kbps & indefinido & Provedor-. Acesso por CSMA-CD.\\
         Profibus DP & 1989 & 12~Mbps & 126 & \\
         AS-i & 1994 & & 62 & Comunicação e alimentação sobre apenas 2 fios.\\
         EtherCAT & 2003 & & & \\
@@ -94,8 +94,34 @@ Como o HART manda o sinal digital sobre o de 4 a 20 mA, ele não pode definr 0 e
 Assim como no Modbus, usa um endereço para definir o escravo com que deseja se comunicar e um campo de comando, equivalente ao de função do Modbus. Tem alguns comandos HART que são aceitos por todo dispositivo HART, outro conjunto de \emph{best practices} que é implementado pela maioria dos dispositivos e pode ainda ter comandos específicos para determinado disppositivo.
 
 \subsection{CAN}
-Originalmente significava \emph{Car Area Network}, pois foi criado pela Bosch para fazer uma rede de sensores dentro de um carro. Atualmente tem seu uso em redes de sensores industriais, servindo de base para outros protocolos, tais como o DeviceNet.
+Originalmente significava \emph{Car Area Network}, pois foi criado pela Bosch para fazer uma rede de sensores dentro de um carro. Atualmente tem seu uso em redes de sensores industriais, servindo de base para outros protocolos, tais como o DeviceNet. É um protocolo multi-mestre, com sistema de detecção de colisões na comunicação.
 
+Este protocolo usa um par trançado como meio de comunicação, com os fios chamados de \emph{CAN Hi} e \emph{CAN Lo}, podendo ser conectado nos instrumentos (nós) de forma linear ou numa mistura de ligações lineares e em estrela (apenas no modo de tolerância a falhas, onde a velocidade fica limitada a \SI{128}{kbps}). Em ambos os casos o cabo tem um resistor de terminação conectando ambos os fios, o que faz com que a tensão diferencial entre eles se aproxime de \SI{0}{V} quando nenhum nó gera sinal.
+
+O valor 0 no CAN (também chamado de dominante) é quando se aplica \SI{5}{V} ao \emph{CAN Hi} e \SI{0}{V} ao \emph{CAN Lo}, já o 1 (ou recessivo) é quando não se aplica sinal e o resisstor traz ambos os fios para próximo de \SI{2,5}{V}. Esta característica é usada na definição de prioridade de comunicação.
+
+CAN é um protocolo produtor-consumidor, onde não se envia o endereço do nó mais sim um ID da própria mensagem, com 11 ou 29 bits, dependendo da versão do CAN. O nó que precisar daquela informação detecta pelo ID. Como o ID é o primeiro campo a ser transmitido, ele serve como definidor de prioridade da comunicação, pois quanto menor o ID, mais facilmente aquela mensagem consegue acesso ao barramento.
+
+\textbf{Exemplo:} 2 nós querem acessar o barramento, sendo que um quer mandar uma mensagem de ID 1000
+(0b01111101000) e outro com ID 500 (0b00111110111). Ambos os nós ficam lendo o barramento para detectar se está livre e começam a enviar a mensagem ao mesmo tempo. O primeiro bit é zero em ambos os casos e não há choque nenhum. O segundo bit é um 0 no que tem ID 500 e 1 no de ID 1000, como o 1 é recessivo, o barramento fica com valor 0. O nó que queria mandar a mensagem 1000 nota que o barramento está com um valor diferente edesiste de mandar, esperando outra oportunidade.
+
+\begin{center}
+\begin{tabular}{r|cccccc}
+    \textbf{1000}       & \cellcolor{blue!25}0 & \cellcolor{red!25}1 & \multicolumn{4}{c}{\cellcolor{gray!25}desiste} \\
+    \textbf{500}        & \cellcolor{blue!25}0 & \cellcolor{blue!25}0 & \cellcolor{red!25}1   & \cellcolor{red!25}1   & \cellcolor{red!25}1   & $\cdots$  \\
+    \textbf{barramento} & \cellcolor{blue!25}0 & \cellcolor{blue!25}0 & \cellcolor{red!25}1   & \cellcolor{red!25}1   & \cellcolor{red!25}1   & $\cdots$ 
+\end{tabular}
+\end{center}
+
+\subsubsection{DeviceNet}
+O protocolo DeviceNet, criaado em XXXX é um protocolo industrial implementado sobre o CAN. Ele aproveita o campo de ID do CAN para implementar um endereço de dispositivo com 6 bits, permitindo até 63 dispositivos.
+
+O DeviceNet é feito para permitir retirada e colocação de dispositivos com a rede funcionando. Novs dispositivos começam com um escravo, com endereço 63 e depois são configurados com um novo endereço e com um de três possíveis modos de operação:
+\begin{description}
+    \item[Polled -- ]Neste modo os dispositivos continuam como escravos, apenas respondendo a pedidos de um mestre.
+    \item[Cyclic -- ]Os dispositivos ficam enviando informação a intervalos definidos.
+    \item[Change-of-State --] Enviam mensagens sempre que sua informação mudar. Eles também ficam enviando mensagens periodicamente mesmo que não mude de valor para que a rede saiba que ele continua funcionando.
+\end{description}
 
 \subsection{Profibus DP}
 
