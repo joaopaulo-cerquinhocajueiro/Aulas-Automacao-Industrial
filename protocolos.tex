@@ -25,7 +25,8 @@ A tabela \ref{tab:protocolos} lista algumas características destes protocolos d
         Modbus TCP & - & definido pela rede & ilimitado & Mestre escravo. Roda sobre TCP-IP\\
         HART & 1986 & & 15 & Definido como um sinal digital sobre um sinal 4-20 mA.\\
         CAN & 1987 & 512/128 kbps & indefinido & Provedor-. Acesso por CSMA-CD.\\
-        Profibus DP & 1989 & 12~Mbps & 126 & \\
+        Profibus DP & 1993 & 12~Mbps & 126 & \\
+        Profinet &  & definido pela rede &  & \\
         AS-i & 1994 & & 62 & Comunicação e alimentação sobre apenas 2 fios.\\
         EtherCAT & 2003 & & & \\
         OPC-UA & 2006 & & & \\
@@ -123,13 +124,25 @@ O DeviceNet é feito para permitir retirada e colocação de dispositivos com a 
     \item[Change-of-State --] Enviam mensagens sempre que sua informação mudar. Eles também ficam enviando mensagens periodicamente mesmo que não mude de valor para que a rede saiba que ele continua funcionando.
 \end{description}
 
-\subsection{Profibus DP}
+\subsection{Profibus DP e PA}
+Profibus foi criado na Alemanha em 1989, sendo adotado pela Siemens em vários equipamentos. Atualmente se usam 2 versões: Profibus DP (\emph{Decentralized Peripherals}) e Profibus PA (Process Automation). Ambos são basicamente o mesmo protocolo, só diferenciando na camada física, onde o PA é feito para ambientes com risco de explosão, o que limita sua velocidade. Isso faz com que uma rede Profibus DP possa ter dispositivos PA usando um simples conversor.
 
+O Profibus é um protocolo onde os controladores são mestres e os dispositivos escravos, e a definição de qual mestre controla o barramento se dá por \emph{token passing}.
 
+\subsection{Profinet}
+Profinet é um protocolo industrial definido sobre uma rede ethernet, o que permite usar uma mesma rede para aplicações comuns e controle industrial. Dentro da especificação Profinet, 3 níveis são definidos: TCP/IP, que define o protocolo como uma aplicação em cima do protocolo TCP/IP, com tempos de resposta por volta de \SI{100}{ms}; RT (\emph{Real Time}), com tempos de ciclo menores que \SI{10}{ms} e IRT (\emph{Isochronous Real Time}), com tempos de ciclo menores que \SI{1}{ms} para aplicações de sistemas de posicionamento rápido e preciso, como em robôs industriais.
+
+Os níveis RT e IRT requerem um hardware próprio para garantir a comunicação em tempo real, porém este hardware ainda deve ser compatível com aplicações ethernet comuns.
+
+Apesar de serem redes diferentes, Profibus e Profinet são definidos pela mesma instituição e tem alguns elementos em comum, tais como a definição de funções e pontos de acesso dos dispositivos, o que torna a interligação de redes Profibus e Profinet simplificada. 
 
 \subsection{AS-i}
 
+A rede AS-i, \emph{Actuator Sensor Interface} foi desenvolvida para facilitar a conexão de dispositivos simples, tais como atuadores e sensores discretos. É uma rede com um único mestre e que usa um cabeamento próprio, incorporando alimentação e comunicação em apenas 2 fios.
 
+O cabo mais comum de uma rede AS-i é um cabo amarelo com dois condutores paralelos. O cabo AS-i tem um perfil tal que impede a inversão da conexão, feita apenas pela prensagem do cabo num conector, que perfura o cabo com os dois terminais. Além disso, o material do cabo é \emph{cicatrizante}, isolando os furo caso se retire o conector.
+
+Sobre este cabo vão a tensão de \SI{24}{V} para alimentar os escravos e o sinal de comunicação, que são pulsos de +2 e \SI{-2}{V} somados à tensão contínua. O pacote de comunicação AS-i permite endereçar até 62 escravos, enviando 5 bits de dados a cada escravo e recebendo 4 bits de dados. Ou seja, cada escravo pode ter 5 atuadores binários e 4 sensores binários. Uma rede completa com 62 escravos consegue se comunicar com todos 
 
 \subsection{EtherCAT}
 
