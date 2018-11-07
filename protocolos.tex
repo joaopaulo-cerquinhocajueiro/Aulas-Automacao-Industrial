@@ -28,7 +28,7 @@ A tabela \ref{tab:protocolos} lista algumas características destes protocolos d
         Profibus DP & 1993 & 12~Mbps & 126 & \\
         Profinet &  & definido pela rede &  & \\
         AS-i & 1994 & & 62 & Comunicação e alimentação sobre apenas 2 fios.\\
-        EtherCAT & 2003 & & & \\
+        EtherCAT & 2003 & 100~Mbps & indefinido & Ethernet em anel para tempo real.\\
         OPC-UA & 2006 & & & \\
         \hline
     \end{tabular}
@@ -114,8 +114,8 @@ CAN é um protocolo produtor-consumidor, onde não se envia o endereço do nó m
 \end{tabular}
 \end{center}
 
-\subsubsection{DeviceNet}
-O protocolo DeviceNet, criaado em XXXX é um protocolo industrial implementado sobre o CAN. Ele aproveita o campo de ID do CAN para implementar um endereço de dispositivo com 6 bits, permitindo até 63 dispositivos.
+\subsection{DeviceNet}
+O protocolo DeviceNet é um protocolo industrial implementado sobre o CAN. Ele aproveita o campo de ID do CAN para implementar um endereço de dispositivo com 6 bits, permitindo até 63 dispositivos.
 
 O DeviceNet é feito para permitir retirada e colocação de dispositivos com a rede funcionando. Novs dispositivos começam com um escravo, com endereço 63 e depois são configurados com um novo endereço e com um de três possíveis modos de operação:
 \begin{description}
@@ -140,14 +140,28 @@ Apesar de serem redes diferentes, Profibus e Profinet são definidos pela mesma 
 
 A rede AS-i, \emph{Actuator Sensor Interface} foi desenvolvida para facilitar a conexão de dispositivos simples, tais como atuadores e sensores discretos. É uma rede com um único mestre e que usa um cabeamento próprio, incorporando alimentação e comunicação em apenas 2 fios.
 
-O cabo mais comum de uma rede AS-i é um cabo amarelo com dois condutores paralelos. O cabo AS-i tem um perfil tal que impede a inversão da conexão, feita apenas pela prensagem do cabo num conector, que perfura o cabo com os dois terminais. Além disso, o material do cabo é \emph{cicatrizante}, isolando os furo caso se retire o conector.
+O cabo mais comum de uma rede AS-i é um cabo amarelo com dois condutores paralelos, tal como na Figura \ref{fig:asi}. O cabo AS-i tem um perfil tal que impede a inversão da conexão, feita apenas pela prensagem do cabo num conector, que perfura o cabo com os dois terminais. Além disso, o material do cabo é \emph{cicatrizante}, isolando os furo caso se retire o conector.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/ASiCable}
+    \caption{Cabo AS-i.}\label{fig:asi}
+\end{figure}
 
 Sobre este cabo vão a tensão de \SI{24}{V} para alimentar os escravos e o sinal de comunicação, que são pulsos de +2 e \SI{-2}{V} somados à tensão contínua. O pacote de comunicação AS-i permite endereçar até 62 escravos, enviando 5 bits de dados a cada escravo e recebendo 4 bits de dados. Ou seja, cada escravo pode ter 5 atuadores binários e 4 sensores binários. Uma rede completa com 62 escravos consegue se comunicar com todos 
 
 \subsection{EtherCAT}
 
+O protocolo EtherCAT, de \emph{Ethernet for Control Automation Technology}, é uma extensão do protocolo Ethernet que permite a comunicação em tempo real, com tempos de ciclo de menos que \SI{100}{\micro\second}. Para obter isso, a rede EtherCAT usa as mesmas camadas físicas e de enlace da ethernet, porém é conectada em anel e em vez de um pacote ethernet ser endereçado a apenas um dispositivo, na EtherCAT ele pode ter dados e comandos a vários, e eventualmente todos dispositivos da rede, que devem então receber o pacote, interpretá-lo, retirar a informação enviada a este dispositivo e anexar informações que ele deva enviar.
 
+A necessidade de tratar e reenviar os pacotes a medida que vão chegando faz com que se necessite de um hardware específico em cada escravo ETherCAT, porém um servidor EtherCAT pode ser implementado como um aplicativo num computador sobre uma placa Ethernet padrão.
+
+Atualmente existem vários dispositivos ETherCAT usando Ethernet 100BASE-TX, cuja taxa de \SI{100}{Mbps} \emph{full-duplex} é suficiente para todas aplicações. A princípio se pode ter EtherCAT sobre Gigabit Ethernet, mas ainda não se tem a necessidade para tal.
 
 \subsection{OPC-UA}
 
+OPC-UA (\emph{Open Platform Communications -- Unified Architecture}) é um protocolo de comunicação sobre internet que data de 2006. Ou seja, na pilha de protocolos TCP/IP ele conta como um aplicativo. Ele é definido numa licença \emph{open source} multiplataforma. É uma versão evoluída do protocolo OPC, que dependia de recursos exclusivos a plataformas Windows.
 
+Há na verdade 2 protocolos definidos na especificação OPC-UA, um protocolo binário diretamente sobre TCP, mais difícil de ser implementado, porém com menor \emph{overhead}, e um sobre html, que requer mais recursos.
+
+Dispositivos OPC-UA, ou nós, podem ser servidores ou clientes, e são definidos tais como objetos em linguagens de orientação a objetos, tendo atributos, que podem ser lidos, métodos, que podem ser executados e eventos que podem ser disparados. A especificação completa do OPC-UA é bastante extensa, ocupando 1250 páginas, divididas em 14 documentos. Normalmente a implementação é feita através de SDKs, em várias linguagens, tais como C, C++, Java ou Python.
