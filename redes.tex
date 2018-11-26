@@ -124,10 +124,12 @@ A aplicação final, que gera e/ou consome o dado transmitido.
 	A figura \ref{fig:tcp-ip} mostra a sequência que é feita com uma informação passada por http pela internet.
 	\begin{figure}[hbt]
 		\begin{center}
-			\includegraphics[width=\textwidth]{figuras/tcp-ip}
+			\includegraphics[width=0.7\textwidth]{figuras/tcp-ip}
+%			\def\svgwidth{0.7\textwidth}
+%		   \input{figuras/tcp-ip2.pdf_tex}
+			\caption{Encapsulamento da informação na pilha TCP/IP}
+			\label{fig:tcp-ip}
 		\end{center}
-		\caption{Encapsulamento da informação na pilha TCP/IP}
-		\label{fig:tcp-ip}
 	\end{figure}
 
 Como exemplo, um navegador de internet tem vários protocolos do nível de aplicação: http, para buscar páginas não criptografadas, https, para páginas criptografadas, dns, para descobrir o endereço ip relacionado a um determinado endereço, entre outros.
