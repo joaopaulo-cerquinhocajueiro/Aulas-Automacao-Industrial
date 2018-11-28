@@ -50,6 +50,155 @@ A camada física também limita aspectos da chamada topologia da rede, que é a 
 	\item[Malha] Cada nó conectado a vários outros, sem uma hierarquia ou ordem bem definida.
 \end{description}
 
+A figura \ref{fig:topologia} mostra exemplos de algumas destas topologias.
+
+\begin{figure}[h]
+	\centering
+	\newcommand\newtemplate[4][1.0]%
+	{\newsavebox#2%
+	 \savebox#2%
+	  {\begin{tabular}{@{}c@{}}
+		 \begin{tikzpicture}[scale=#1]
+		 #4
+		 \end{tikzpicture}\\[-0ex]
+		 \templatecaption{#3}\\[-2ex]
+	   \end{tabular}%
+	  }%
+	}
+   \newcommand\template[1]{\usebox{#1}}             % use the Code stored in box #1
+   \newcommand\templatecaption[1]{{\sffamily\small#1}}       % typeset caption
+   \newcommand\Tr{\mathop{\mathrm{Tr}}}
+   
+   \tikzset{%
+	 no/.style      = {draw, circle, fill=green!40!white}, % Network node
+   }
+   
+   \newtemplate\bus{Barramento}{
+	   \draw
+	   node at (0,0)[no] (A){A} 
+	   node[no,right of=A] (B){B} 
+	   node[no,right of=B] (C){C} 
+	   node[no,right of=C] (D){D} 
+	   node[no,right of=D] (E){E} 
+	   node[no,right of=E] (F){F};
+	   
+	   
+	   \draw[]($(A)+(-0.5,0.6)$)--($(F)+(0.5,0.6)$);
+	   \draw[]($(A)+(0,0.6)$)--(A);
+	   \draw[]($(B)+(0,0.6)$)--(B);
+	   \draw[]($(C)+(0,0.6)$)--(C);
+	   \draw[]($(D)+(0,0.6)$)--(D);
+	   \draw[]($(E)+(0,0.6)$)--(E);
+	   \draw[]($(F)+(0,0.6)$)--(F);
+   }
+   
+   \newtemplate\linha{Linha}{
+   \draw
+	   node at (0,0)[no] (A){A} 
+	   node[no,right of=A] (B){B} 
+	   node[no,right of=B] (C){C} 
+	   node[no,right of=C] (D){D} 
+	   node[no,right of=D] (E){E} 
+	   node[no,right of=E] (F){F};
+	   
+	   
+	   \draw[](A)--(B);
+	   \draw[](B)--(C);
+	   \draw[](C)--(D);
+	   \draw[](D)--(E);
+	   \draw[](E)--(F);
+   }
+   
+   \newtemplate[0.8]\anel{Anel}{
+	   \draw
+	   node at (  0:1.5)[no] (A){A} 
+	   node at ( 60:1.5)[no] (B){B} 
+	   node at (120:1.5)[no] (C){C} 
+	   node at (180:1.5)[no] (D){D} 
+	   node at (240:1.5)[no] (E){E} 
+	   node at (300:1.5)[no] (F){F};
+	   
+	   
+	   \draw[](A)--(B);
+	   \draw[](B)--(C);
+	   \draw[](C)--(D);
+	   \draw[](D)--(E);
+	   \draw[](E)--(F);
+	   \draw[](F)--(A);
+   }
+   
+   \newtemplate[0.8]\cheio{Totalmente conectado}{
+	   \draw
+	   node at (  0:1.5)[no] (A){A} 
+	   node at ( 60:1.5)[no] (B){B} 
+	   node at (120:1.5)[no] (C){C} 
+	   node at (180:1.5)[no] (D){D} 
+	   node at (240:1.5)[no] (E){E} 
+	   node at (300:1.5)[no] (F){F};
+	   
+	   
+	   \draw[](A)--(B);
+	   \draw[](A)--(C);
+	   \draw[](A)--(D);
+	   \draw[](A)--(E);
+	   \draw[](B)--(C);
+	   \draw[](B)--(D);
+   |	\draw[](B)--(E);
+   |	\draw[](B)--(F);
+	   \draw[](C)--(D);
+	   \draw[](C)--(E);
+	   \draw[](C)--(F);
+	   \draw[](D)--(E);
+	   \draw[](D)--(F);
+	   \draw[](E)--(F);
+	   \draw[](F)--(A);
+   }
+   
+   \newtemplate\malha{Malha}{
+	   \draw
+	   node at (  0,0)[no] (A){A} 
+	   node[no, below right of=A] (B){B} 
+	   node[no, above right of=A] (C){C} 
+	   node[no, right of=C] (D){D} 
+	   node[no, right of=B] (E){E} 
+	   node[no, right of=D] (F){F};
+	   
+	   
+	   \draw[](A)--(B);
+	   \draw[](A)--(C);
+	   \draw[](B)--(C);
+	   \draw[](B)--(E);
+	   \draw[](C)--(D);
+	   \draw[](D)--(F);
+   }
+   
+   \newtemplate[0.8]\estrela{Estrela}{
+	   \draw
+	   node at (  0,0)[no] (A){A} 
+	   node at ( 18:1.5)[no] (B){B} 
+	   node at (90:1.5)[no] (C){C} 
+	   node at (162:1.5)[no] (D){D} 
+	   node at (234:1.5)[no] (E){E} 
+	   node at (306:1.5)[no] (F){F};
+	   
+	   
+	   \draw[](A)--(B);
+	   \draw[](A)--(C);
+	   \draw[](A)--(D);
+	   \draw[](A)--(E);
+	   \draw[](A)--(F);
+   }
+   
+   \begin{tikzpicture}[auto, thick, node distance=1.5cm, >=triangle 45]
+   \node at (0,0) {\template\bus};
+   \node at (0,2) {\template\linha};
+   \node at (-6,1) {\template\malha};
+   \node at (-6,-3) {\template\anel};
+   \node at (-2,-3) {\template\estrela};
+   \node at (2,-3) {\template\cheio};
+   \end{tikzpicture}
+	   \caption{Alguns tipos de topologias de rede.}\label{fig:topologia}
+\end{figure}
 \subsubsection{Enlace}
 
 A camada de enlace cuida da comunicação de um dispositivo a seu vizinho, que não necessariamente são os pontos inicial e final de uma comunicação.
@@ -83,7 +232,71 @@ Esta é a última camada a que uma comunicação chega num dispositivo que não 
 
 \begin{figure}[hbt]
 	\begin{center}
-		\includegraphics[width=0.6\textwidth]{figuras/network_layer}
+		% \includegraphics[width=0.6\textwidth]{figuras/network_layer}
+		\tikzset{%
+		block/.style    = {draw, thick, rectangle, minimum height = 2em,
+		  minimum width = 3.0cm, align=center},
+	  	}
+		\begin{tikzpicture}[auto, thick, node distance=1.5cm, >=triangle 45]
+			\fill [orange!30!white] (-1.8,-0.8) rectangle (1.8,11.2);
+			\fill [green!30!white] (2.2,-0.8) rectangle (5.8,11.2);
+			\fill [cyan!30!white] (6.2,-0.8) rectangle (9.8,11.2);
+			\draw 
+				node at (0,0)[block] (phys1){Física}
+				node[block,above of=phys1] (enlace1){Enlace}
+				node[block,above of=enlace1] (rede1){Rede}
+				node[block,above of=rede1] (trans1){Transporte}
+				node[block,above of=trans1] (sessao1){Sessão}
+				node[block,above of=sessao1] (apr1){Apresentação}
+				node[block,above of=apr1] (apl1){Aplicação}
+				node[text width=2.0cm,align=center,above of=apl1] (nome1){Sistema inicial};
+			\draw
+				node at (3.25,0)[block,minimum width = 1.4cm] (phys2){\small{Física}}
+				node at (4.75,0)[block,minimum width = 1.4cm] (phys2b){\small{Física}}
+				node[block,above of=phys2,minimum width = 1.4cm] (enlace2){\small{Enlace}}
+				node[block,above of=phys2b,minimum width = 1.4cm] (enlace2b){\small{Enlace}}
+				node at(4,3)[block] (rede2){Rede}
+				node[block,above of=rede2] (trans2){Transporte}
+				node[block,above of=trans2] (sessao2){Sessão}
+				node[block,above of=sessao2] (apr2){Apresentação}
+				node[block,above of=apr2] (apl2){Aplicação}
+				node[text width=2.0cm,align=center,above of=apl2] (nome2){Sistema\\intermediário};
+			
+			\draw
+				node at (8,0)[block] (phys3){Física}
+				node[block,above of=phys3] (enlace3){Enlace}
+				node[block,above of=enlace3] (rede3){Rede}
+				node[block,above of=rede3] (trans3){Transporte}
+				node[block,above of=trans3] (sessao3){Sessão}
+				node[block,above of=sessao3] (apr3){Apresentação}
+				node[block,above of=apr3] (apl3){Aplicação}
+				node[text width=2.0cm,align=center,above of=apl3] (nome3){Sistema\\final};
+			
+			\draw[->](apl1)--(apr1);
+			\draw[->](apr1)--(sessao1);
+			\draw[->](sessao1)--(trans1);
+			\draw[->](trans1)--(rede1);
+			\draw[->](rede1)--(enlace1);
+			\draw[->](enlace1)--(phys1);
+			\draw[->](phys1) to [out=300,in=240](phys2);
+			% \draw[->](trans1)--(rede1);
+			% \draw[->](rede1)--(enlace1);
+			% \draw[->](enlace1)--(phys1);
+			% \draw[->](phys1)--(phys2);
+			
+			\draw[->](phys2)--(enlace2);
+			\draw[->](enlace2)--(rede2);
+			\draw[->](rede2)--(enlace2b);
+			\draw[->](enlace2b)--(phys2b);
+			\draw[->](phys2b) to [out=300,in=240](phys3);
+			
+			\draw[->](phys3)--(enlace3);
+			\draw[->](enlace3)--(rede3);
+			\draw[<-](apl3)--(apr3);
+			\draw[<-](apr3)--(sessao3);
+			\draw[<-](sessao3)--(trans3);
+			\draw[<-](trans3)--(rede3);
+			\end{tikzpicture}
 	\end{center}
 	\caption{Comunicação passando por dispositivo intermediário.}
 	\label{fig:camada_rede}
