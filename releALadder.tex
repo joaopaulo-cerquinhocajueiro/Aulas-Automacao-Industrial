@@ -5,15 +5,15 @@ Há vários dispositivos eletromecânicos de interesse para a automação indust
 
 Destes, motores e solenóides são atuadores e chaves são sensores. Relês podem ser usados tanto como atuadores como como sensores, embora sejam mais usados em atuadores.
 
-Chaves já foram vistas junto com instrumentação, enquanto motores são assuntos de outras disciplinas e fogem do escopo desta disciplian.
+Chaves já foram vistas rapidamente junto com instrumentação, enquanto motores formam um vasto assunto, que foge do escopo deste livro.
 
-Solenóides são basicamente eletroimãs com um eixo ferromagnético preso a uma mola. O eixo pode ter duas posições: uma mantida pela mola, que é a posição que ele assume quando o eletroimã não é acionado, e outra forçando a mola, quando o eletroimã é acionado. Ou seja: são dispositivos de acionamento binários.
+Solenóides são basicamente eletroimãs com um eixo ferromagnético preso a uma mola. O eixo pode ter duas posições: uma mantida pela mola, que é a posição de descanso, que ele assume quando o eletroimã não é acionado, e outra forçando a mola, quando o eletroimã é acionado. Ou seja: são dispositivos de acionamento binários.
 
-Solenóides tipicamente fornecem uma movimentação de no máximo poucos centímetros a cargas de miligramas a dezenas de kilogramas. São muito usados para acionamento de válvulas - válvulas solenóides.
+Solenóides tipicamente fornecem uma movimentação de no máximo poucos centímetros a cargas de miligramas a dezenas de kilogramas. São muito usados para acionamento de válvulas, chamadas por conta disto válvulas solenóides.
 
-Relês eletromecânicos são, por construção, solenóides no qual o eixo faz abrir ou fechar contatos elétricos. Eles são chaves elétricas acionadas eletricamente. Hoje em dia existem relês baseados em eletrônica, chamados de relês de estado sólido, que tem a mesma função mas por princípios de funcionamento bem diferentes. Eletricamente pode-se visualizar um relê apenas como um indutor (a bobina do eletroimã) e um contato, e muitas vezes é desta forma que ele é representado em um diagrama esquemático (vide exemplo na Figura \ref{fig:diagRele}).
+Relês eletromecânicos são, por construção, solenóides no qual o eixo faz abrir ou fechar contatos elétricos. Eles são chaves elétricas acionadas eletricamente. Hoje em dia existem relês baseados em eletrônica, chamados de relês de estado sólido, que tem a mesma função mas por princípios de funcionamento bem diferentes. Eletricamente pode-se visualizar um relê convencional apenas como uma bobina (que tem o papel de eletroimã) e um contato, e muitas vezes é desta forma que ele é representado em um diagrama esquemático (vide exemplo na Figura \ref{fig:diagRele}).
 
-O estado de repouso dos cantatos define o tipo básico do relê: normalmente aberto ou normalmente fechado. É comum relês que tenham 2 ou mais contatos acionadas por uma mesma bobina, inclusive podendo ser uma normalmente aberta e outra normalmente fechada, tal como o relê da figura \ref{fig:fotoRele}.
+O estado de repouso dos contatos define o tipo básico do relê: normalmente aberto ou normalmente fechado. É comum relês que tenham 2 ou mais contatos acionadas por uma mesma bobina, inclusive podendo ser um normalmente aberto e outro normalmente fechado, tal como o relê da figura \ref{fig:fotoRele}.
 
 \begin{figure}[!h]
   \centering
@@ -22,7 +22,7 @@ O estado de repouso dos cantatos define o tipo básico do relê: normalmente abe
   \caption{Foto de um relê e representação esquemática.}
 \end{figure}
 
-Uma grande utilidade dos relês vem do fato que a bobina de acionamento é eletricamente isolada dos cantatos, o que permite usar relês para:
+Uma grande utilidade dos relês vem do fato que a bobina de acionamento é eletricamente isolada dos contatos, o que permite usar relês para:
 \begin{itemize}
   \item Controle de alta tensão e/ou potência através de baixa tensão e/ou potência -- um sinal de mW pode comandar kW de potência através de um relê.
   \item Isolação e proteção do circuito de controle.
@@ -54,9 +54,9 @@ Em geral é mais fácil analisar um circuito do ponto de vista lógico separando
 \subsection{Diagrama Ladder}
 \label{sec:diagrama-ladder}
 
-Os diagramas ladder são muito utilizados para representar circuitos com relês enfantizando a lógica da ligação. Neste tipo de diagrama as bobinas tem o símbolo \includegraphics[height=0.9em]{figuras/bobina_ladder}, os contatos normalmente abertos são simbolizados por \includegraphics[height=0.9em]{figuras/na_ladder} e os normalmente fechados por \includegraphics[height=0.9em]{figuras/nf_ladder}.
+Os diagramas ladder foram originalmente criados para representar circuitos com relês enfantizando a lógica da ligação. Neste tipo de diagrama as bobinas tem o símbolo \includegraphics[height=0.9em]{figuras/bobina_ladder}, os contatos normalmente abertos são simbolizados por \includegraphics[height=0.9em]{figuras/na_ladder} e os normalmente fechados por \includegraphics[height=0.9em]{figuras/nf_ladder}.
 
-A Figura \ref{fig:ladder1} mostra o mesmo circuito de controle da Figura \ref{fig:releCircuito2}, só que agora descrito em ladder. Com os circuitos conectados desta maneira, o diagrama fica parecendo uma escada; daí o nome\footnote{em inglês \emph{ladder} significa escada.}.
+A Figura \ref{fig:ladder1} mostra o mesmo circuito de controle da Figura \ref{fig:releCircuito2}, só que agora descrito em ladder. Com os circuitos conectados desta maneira, o diagrama fica parecendo uma escada -- daí o nome, pois em inglês \emph{ladder} significa escada.
 
 
 \begin{figure}[!h]
@@ -80,23 +80,22 @@ Como exemplo, a figura \ref{fig:ladders} mostra diagramas ladder que acendem uma
   \label{fig:ladders}
 \end{figure}
 
-
-O engenheiro Claude Shannon descobriu em 1934 a relação entre os circuitos chaveados e a álgebra de Boole, que é um mapeamento da lógica em uma álgebra. Uma ligação em série realiza um $\mathrm{AND}$ lógico (uma multiplicação booleana), uma ligação paralela realiza um $\mathrm{OR}$ lógico (uma soma na álgebra de Boole) e o uso de um contato normalmente fechado realiza a inversão lógica, ou o $\mathrm{NOT}$ (representado por uma barra sobre a variável). A álgebra de Boole mostra que a combinação destas três operações, e portanto a combinação destes três circuitos, permite realizar qualquer condição lógica para o acionamento do que quer que seja, muito embora a aplicação direta dos postulados e teoremas desta álgebra não seja muito intuitiva.
+O engenheiro Claude Shannon descreveu em 1934 a relação entre os circuitos chaveados e a álgebra de Boole, que é um mapeamento da lógica em uma álgebra. Uma ligação em série realiza um $\mathrm{AND}$ lógico (uma multiplicação booleana), uma ligação paralela realiza um $\mathrm{OR}$ lógico (uma soma na álgebra de Boole) e o uso de um contato normalmente fechado realiza a inversão lógica, ou o $\mathrm{NOT}$ (representado por uma barra sobre a variável). A álgebra de Boole mostra que a combinação destas três operações, e portanto a combinação destes três circuitos, permite realizar qualquer condição lógica para o acionamento do que quer que seja, muito embora a aplicação direta dos postulados e teoremas desta álgebra não seja, às vezes, muito intuitiva.
 
 Porém, apesar da facilidade deste diagrama, a montagem física ainda era bastante complexa, uma vez que o acionamento e os contatos de um relê são obrigatoriamente parte de um único dispositivo físico, e que para lógicas mais complexas essa fiação se tornava bastante complicada. Isto é ainda mais preocupante quando se precisa alterar a lógica de funcionamento, pois se tem que mexer no circuito como um todo.
 
-Além disso, por ser um dispositivo eletromecânico, relês não tem um elevado tempo de vida: pode chavear talvez menos que 10 000 vezes, dependendo da tensão e corrente que suporta.
+Além disso, por ser um dispositivo eletromecânico, relês não tem um elevado tempo de vida: dificilmente consegue chavear mais que 10 000 vezes, dependendo da tensão e corrente que suporta.
 
-Em 1947, foi inventado o transistor, que age, como o relê, como uma chave elétrica controlada eletricamente. Principalmente pelo fato de não ter partes móveis, um transistor tem um tempo de vida muito mais longo que um relê, além de ter um chavemaneto mais rápido. Isto permitiu a construção de computadores eletrônicos muito mais rápidos, confiáveis e robustos que os a relê. O problema para o uso na automação é que os transistores não aguentam tensões e correntes tão elevadas quanto os relês.
+Em 1947, foi inventado o transistor, que pode agir, como o relê, como uma chave elétrica controlada eletricamente. Principalmente pelo fato de não ter partes móveis, um transistor tem um tempo de vida muito mais longo que um relê, além de ter um chaveamento mais rápido. Isto permitiu a construção de computadores eletrônicos muito mais rápidos, confiáveis e robustos que os a relê. O problema para o uso na automação é que os transistores não aguentam tensões e correntes tão elevadas quanto os relês.
 
-Em 1968, a GM lançou uma especificação de um elemento de controle que pudesse substituir relês. Esta especificação pedia por:
+Em 1968, a GM lançou uma especificação de um elemento de controle que pudesse substituir os circuitos chaveados a relês. Esta especificação pedia por:
 \begin{itemize}
   \item Facilidade de programação;
   \item Facilidade na manutenção (encaixe de módulos);
-  \item Confiabilidade maior;
+  \item Maior confiabilidade;
   \item Mais compacto;
-  \item Possibilitar o envio de dados à central de processamento;
-  \item Economicamente competitivo;
+  \item Possibilitar o envio de dados a uma central de processamento;
+  \item Economicamente competitivo -- ou seja, não muito mais caro;
   \item Entradas em tensão alternada 115 V;
   \item Saídas  em 115 V C.A. com mais que 2 A (operação das válvulas solenóides, comando para partida de motores e outros);
   \item Possibilitar a ampliação com um mínimo de alteração;
@@ -112,7 +111,7 @@ A partir desta especificação, foi desenvolvido pela Bedford Associates o prime
   \label{fig:plc_sistema}
 \end{figure}
 
-As entradas e saídas dos CLPs são isoladas eletricamente, uma vez que o microcontrolador não suporta altas tensões ou correntes. Tipicamente ainda são usados relês para a implementação das saídas digitais, mas cada vez mais se tem soluções totalmente eletrônicas. A Figura \ref{fig:ESclp} mostra circuitos típicos de entrada e saída.
+As entradas e saídas dos CLPs são isoladas eletricamente, uma vez que o microcontrolador não suporta altas tensões ou correntes. Inicialmente eram usados relês para a implementação das saídas digitais, mas cada vez mais se tem soluções totalmente eletrônicas. A Figura \ref{fig:ESclp} mostra circuitos típicos de entrada e saída.
 \begin{figure}[h]
   \centering
   \begin{tabular}{cc}

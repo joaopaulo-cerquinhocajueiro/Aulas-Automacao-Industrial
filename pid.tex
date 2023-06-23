@@ -36,7 +36,7 @@ Vários instrumentos tem símbolos próprios, tais como bombas e válvulas. Outr
 \subsection{Transmissão de dados}
 \label{sub:TransmissaoDeDados}
 
-A forma como os sinais são transmitidos entre os instrumentos é indicada porum padrão. A linha que liga os instrumentos são decoradas de acordo com a forma com que a informação passa de um instrumento para o outro, de acordo com a figura \ref{fig:linhasISA}.
+As linhas que ligam os instrumentos são decoradas de acordo com a forma com que a informação passa de um instrumento para o outro, de acordo com a figura \ref{fig:linhasISA}.
 \begin{figure}[h]
   \centering
   \includegraphics[width = 0.6\textwidth]{figuras/linhasISA}
@@ -48,18 +48,11 @@ Sinais comuns são:
   \item[Pneumáticos.] Usam gás comprimido na faixa de 20 a \SI{100}{\kilo\pascal}. É usado em áreas que se tenha risco de explosão. Tem limitação com a distância e é difícil de detectar vazamentos.
 
 %  A razão de usar uma pressão mínima maior que a ambiente (aproximadamente \) é para facilitar a detecção de erros: Se o transmissor não funcionar a pressão vai cair para abaixo de \SI{20}{\kilo\pascal}
-  \item[Hidráulico.] Usam óleo sobre pressão. São mais caros que sistemas pneumáticos porém são mais rápidos e podem ser usados para acionar equipamentos de grande porte.
-  \item[Elétrico.] Usam um sinal de 4 a \SI{20}{mA} ou de 1 a \SI{5}{\volt}. Em geral o de corrente, pois são menos sujeitos a interferências.
-
-  Os receptores deste tipo de sinal tem internamente um resistor de \SI{250}{\ohm} em paralelo a sua entrada, o que permite que aceitem ambos tipos.
-
-  A razão de usar um valor mínimo maior que zero é para facilitar a detecção de falhas no transmissor, que normalmente fazem o sinal ir para 0.
-
-  \item[Sinais digitais.] São sinais elétricos modulados de acordo com um protocolo de comunicação digital. São usados nos chamados sensores inteligentes e estão ficando cada vez mais comuns.
+  \item[Hidráulico.] Usam óleo sobre pressão. São mais caros que sistemas pneumáticos porém são mais rápidos e podem até ser usados para acionar alguns equipamentos de grande porte.
+  \item[Elétrico.] Usam um sinal de 4 a \SI{20}{mA} ou de 1 a \SI{5}{\volt} -- os receptores deste tipo de sinal tem internamente um resistor de \SI{250}{\ohm} em paralelo a sua entrada, o que permite que aceitem ambos tipos. A razão de usar um valor mínimo diferente de zero é para detectar uma falha de conexão que zere o sinal. O mais comum é o transmissor de corrente, pois são menos sujeitos a interferências.
+  \item[Sinais digitais.] São sinais elétricos modulados de acordo com um protocolo de comunicação digital. São usados nos chamados sensores inteligentes e estão ficando cada vez mais comuns. Existem muito protocolos diferentes no mercado, com pouca compatibilidade entre eles.
 
   Dependendo do protocolo usado, podem ter um custo total menor que o elétrico analógico por redução de cabeamento. Além disto, a comunicação digital permite passar outras informações, tais como configurações, dados de calibração e diagnósticos.
-
-  Existem muito protocolos diferentes no mercado, com pouca compatibilidade entre eles.
 
   \item[Rádio.] Normalmente usam sinais digitais modulados em rádio frequência. São muito usados para longas distâncias e para equipamentos móveis. Interferência e problemas de segurança diminuem seu uso mais geral.
 \end{description}
