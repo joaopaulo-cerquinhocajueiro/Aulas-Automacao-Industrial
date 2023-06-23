@@ -1,66 +1,55 @@
-%!TEX root = principal.tex
-\section{Definição}
+%!TEX root = apostila.tex
+% \section{Definição}
+\label{chap:automacao}
 A palavra automação vem do latim \emph{automatus} -- mover por si mesmo. Logo a automação de uma tarefa consiste em fazer com que tal tarefa seja realizada sem envolver trabalho humano. Isto pode ser por diversos motivos: seja por que é uma tarefa perigosa e portanto queremos aumentar a segurança das pessoas, seja para fazer a tarefa de forma mais rápida, seja para melhorar a qualidade do produto final ou seja porque simplesmente o custo do trabalho humano é muito elevado. Logo, podemos definir automação da seguinte forma:
 \begin{quote}
   Automação é a substituição do trabalho humano por sistemas autônomos visando melhorar segurança, qualidade, produção e/ou custos.
 \end{quote}
 
-Neste contexto, automação industrial é nada mais que a automação de um sistema industrial, ou de um sistema de manufatura. Embora manufatura venha de fazer com as mãos, a revolução industrial mudou este conceito, passando a significar a fabricação de algum produto. Do ponto de vista econômico, a manufatura é a transformação de materiais (matéria prima) em itens de maior valor (produto). Isto é conseguido por uma determinada sequência de processos químicos e físicos. De forma mais sucinta:
+Neste contexto, automação industrial é nada mais que a automação de um sistema industrial, ou de um sistema de manufatura. Embora manufatura venha de \emph{fazer com as mãos}, desde a revolução industrial que usamos esta palavra significando simplesmente a fabricação de algum produto. Juntando então o conceito de automação, têm-se:
+\begin{quote}
+  A automação industrial consiste em implementar os processos necessários para a manufatura de algum produto com o mínimo de esforço humano, físico ou mental, visando melhor segurança, qualidade, produção e/ou custo.
+\end{quote}
+
+Com base nesta definição, qualquer sistema que realize a manufatura de algum produto automaticamente e sem usar esforço humano é um sistema automatizado. Logo, uma máquina por mais complexa que seja mas que funcione a manivela, tal como uma calculadora mecânica, não se classifica como automação. Da mesma forma uma máquina que não exija esforço físico mas requeira atenção constante, tal como um carro ou mesmo uma batedeira, também não é automatizada; neste último caso usa-se o termo mecanizada.
+
+Do ponto de vista econômico, a manufatura é a transformação de materiais (matéria prima) em itens de maior valor (produto). Isto é conseguido por uma determinada sequência de processos químicos e físicos. De forma mais sucinta:
 \begin{quote}
 	Manufatura é a transformação de matéria prima em produtos pela aplicação de um ou mais processos.
 \end{quote}
 
-Juntando então o conceito de automação com o de manufatura, têm-se:
-\begin{quote}
-  A automação industrial consiste em implementar os processos necessários para a manufatura de algum produto com o mínimo de esforço ou interferência humana, visando melhor segurança, qualidade, produção e custo.
-\end{quote}
-
-Note-se que por esforço humano, quer-se dizer tanto esforço físico quanto mental, logo uma máquina por mais complexa que seja mas que funcione a manivela, tal como uma calculadora mecânica, não se classifica como automação. Da mesma forma uma máquina que não exija esforço físico mas requeira atenção constante, tal como um carro ou mesmo uma batedeira, também não é automatizada; neste último caso usa-se o termo mecanizada.
-
-\section{História}
-
-Embora várias máquinas mecânicas de diversas graus de complexidade já existissem, como por exemplo relógios mecânicos desde o século VIII na china e desde o século XIII na Europa e os robôs de Pierre Jaquet-Droz, do século XVIII, podemos considerar que o início da história da automação foi a revolução industrial, marcada pela invenção do tear mecânico por Cartwright em 1785. Esta invenção realiza um movimento relativamente complexo de forma automática a partir de uma roda d'água e com a finalidade de gerar um produto.
-
-Por volta de 1788 houve a invenção do mecanismo de regulagem de fluxo de vapor de James Watt, o que permitiu controlar a potência de caldeiras e outras máquinas a vapor, manipulando uma potência muito maior que uma roda d'água. Isto foi um grande impulso para a mecanização, mas a verdadeira automatização ainda ficava muito restrita devido a dificuldade de realizar processos complexos de forma automática. Ou seja, retirava-se grande parte do esforço físico do homem, mas ainda era necessário muito esforço mental.
-
-Em 1820 o francês Charles Babbage, trabalhando para automatizar o processo mental do cálculo matemático, começou a desenvolver a sua máquina diferencial, que hoje chamaríamos de uma calculadora mecânica. Ela evoluiu até o conceito da máquina analítica, descrita em 1837, que é considerada o primeiro projeto de computador, embora apenas partes dela tenham sido efetivamente construídas. Estima-se que se fosse totalmente construída, a máquina analítica de Babbage ocuparia um campo de futebol.
-
- Em 1880, Herman Hollerith criou um novo método, baseado na utilização de cartões perfurados e calculadoras mecânicas, para automatizar algumas tarefas de tabulação do censo dos EUA. O uso da máquina de Hollerith fez com que o processamento dos dados do censo, que antes duravam 10 anos, fosse concluído em 6.
-
-Ao longo da primeira metade do século XX foram utilizados muitos sistemas eletromecânicos para o controle de processos industriais. Eram os chamados circuitos chaveados, que utilizavam relês para o controle lógico e para o comando de motores.
-
-Em 1936, Alan Turing descreveu um \emph{computador universal} em seu artigo “On Computable Numbers, with an Application to the Entscheidungsproblem”, o que hoje é conhecido como uma \emph{Máquina de Turing}. Suas idéias foram desenvolvidas em 1944, com a construção do Colossus, considerado como o primeiro computador, embora tivesse a função específica de quebrar o código criptográfico alemão na segunda guerra. Ele consistia de um circuito com 1600 a 2400 válvulas com capacidade de processamento de vinte e cinco mil caracteres por segundo. A titulo de comparação, os computadores de casa de hoje em dia atingem 10 bilhões de cálculos por segundo.
-
-O avanço da eletrônica fez que que a capacidade de processamento dos computadores aumentasse de forma exponencial. Atualmente o mais rápido computador do mundo é o chinês Sunway TaihuLight, que faz 93 quatrilhões de cálculos por segundo, consumindo 15 MW.
-
-Na década de 60 a General Motors fez uma especificação de um CLP -- Controlador Lógico Programável, que é um computador voltado para o controle de processos industriais. Em 1968 foi criado o primeiro.
-
-Hoje em dia toda automação está relacionada a sistemas computadorizados, seja em CLPs, CNCs, robôs industriais, automação dos sistemas de apoio a produção, entre outros.
+Ou seja, na automação industrial estamos interessados em estudar métodos e ferramentas que permitam deixar os processos de manufatura os mais independentes possível da interferência humana. 
 
 \section{Classificação}
 
-Hoje em dia se definem, grosso modo, 3 tipos de automação, tal qual mostra a figura \ref{fig:tipos_automacao}: fixa, flexível e programável.
+O próprio avanço dos sistemas de automação permite com que se tenham equipamentos cada vez mais versáteis, que não sejam feitos para a fabricação de um único produto. Esta possibilidade de equipamentos versáteis levam a, grosso modo, 3 tipos de automação, tal qual mostra a figura \ref{fig:tipos_automacao}: fixa, flexível e programável. Tipicamente são fatores econômicos que levam a escolha de um destes tipos.
+
 \begin{figure}[hbt]
 	\begin{center}
+    \includegraphics[width=0.8\textwidth  ]{figuras/fixaflexprog}
 %		\includegraphics[width=0.6\textwidth]{tipos_automacao}
-	\tikzstyle{area}=[draw,rectangle,rounded corners,text centered,text width=2.2cm,minimum height=1.2cm]
-	\begin{tikzpicture}
-		\draw[very thick, ->, >=stealth'](0,0)--(5.5,0);
-		\draw(5.5,0)node[below left]{Diversidade};
-		\draw[very thick, ->, >=stealth'](0,0)--(0,3.3);
-		\draw(0,3.3)node[above left, rotate=90]{Quantidade};
-		\draw(1.25,2.5)node[area]{Fixa} (2.5,1.55)node[area]{Flexível} (4,0.6)node[area]{Programável};
-	\end{tikzpicture}
+	% \tikzstyle{area}=[draw,rectangle,rounded corners,text centered,text width=2.2cm,minimum height=1.2cm]
+	% \begin{tikzpicture}
+	% 	\draw[very thick, ->, >=stealth'](0,0)--(5.5,0);
+	% 	\draw(5.5,0)node[below left]{Diversidade};
+	% 	\draw[very thick, ->, >=stealth'](0,0)--(0,3.3);
+	% 	\draw(0,3.3)node[above left, rotate=90]{Quantidade};
+	% 	\draw(1.25,2.5)node[area]{Fixa} (2.5,1.55)node[area]{Flexível} (4,0.6)node[area]{Programável};
+	% \end{tikzpicture}
 	\end{center}
 	\caption{Tipos de automação industrial quanto a quantidade e diversidade de produtos.}
 	\label{fig:tipos_automacao}
 \end{figure}
 
-A automação fixa é aplicada à produção de um único produto (ou com mínimas variações), em grandes quantidades: refinaria de petróleo, parafuso, tampas de garrafa, clips, biscoito, cerveja, etc. Ela utiliza equipamentos feitos sob medida para cada processo, que portanto tem alto custo inicial mas grande produtividade.
+A automação fixa é aplicada à produção de um único produto (ou com mínimas variações), em grandes quantidades: refinaria de petróleo, parafuso, tampas de garrafa, clipes de papel, elos de corrente, biscoito, cerveja, etc. Ela utiliza equipamentos feitos sob medida para cada processo, que portanto tem alto custo inicial mas grande produtividade.
 
-A automação flexível é aplicada à produção de produtos parecidos, em que pequenas modificações permitem a alteração do produto, como por exemplo mudança de um perfil a ser prensado ou extrudado ou a mudança das quantidades do mesmo conjunto de matérias primas (mudança de receita). Tipicamente é feita a chamada fabricação em lotes, onde entre um lote e outro se alteram as peças e/ou as sequências a serem seguidas de forma automática para ter o menor tempo parado possível. Exemplos são livros, circuitos integrados, potes de plástico, máquinas de café.
+A automação flexível é aplicada à produção de produtos parecidos, em que pequenas modificações permitem a alteração do produto, como por exemplo mudança de um perfil a ser prensado ou extrudado ou a mudança das quantidades do mesmo conjunto de matérias primas (mudança de receita). Tipicamente é feita a chamada fabricação em lotes, onde entre um lote e outro se alteram as peças e/ou as sequências a serem seguidas de forma automática para ter o menor tempo parado possível. Exemplos são livros, circuitos integrados, potes de plástico, panelas, entre outros.
 
 A automação programável é para produção de produtos diferentes mas cujo volume de produção não justifica um processo único. Ela usa máquinas de propósito geral, tais como robôs, ferramentas de controle numérico e impressoras 3d, onde a definição do processo é quase toda feita por \emph{software}, de modo que o custo do maquinário é diluído em diversos produtos.
+
+Estes três tipos não são precisamente definidos, e fica difícil, muitas vezes, determinar que ponto separa uma automação deixa fixa de uma flexível, ou flexível de programável. Por exemplo, uma fábrica de tampas de garrafa PET, que fabrica tampas vermelhas e verdes, em lotes, deixa de ser fixa por conta da mudança da cor?
+
+Mas quanto mais flexível for o sistema de automação, mas necessitado ele é de sistemas de informática e de equipamentos de uso geral controláveis. De modo geral, a automação fixa pode ser realizada a nível de Indústria
 
 A tendência é cada vez mais ter a automação flexível e programável aumentando a capacidade de produção, de modo que a flexível vai ocupando nichos da fixa e a programável da flexível. Apesar disso, em vários casos é difícil imaginar alguns produtos deixando de utilizar a automação fixa.
 
@@ -138,7 +127,7 @@ quina (IHMs) ou SCADA (\emph{Supervisory Control And Data Acquisition}).
 \emph{Enterprise Resources Planning}.
 \end{description}
 
-A figura \ref{fig:automacao} mostra um diagrama em blocos de um processo automatizado, contendo os blocos representativos dos níveis 0 até o 3 da pirâmide de automação. A instrumentação consiste de sensores para acompanhar as variáveis controladas de um processo e atuadores para alterar as variáveis manipuladas. Como tais atuadores irão operar é definido pelo controle, em função de parâmetros definidos pelo supervisório. Este também monitora estas informações e as repassa ao sistema de gerenciamento, que aglutina dados de diversos processos para a tomada de decisões de mais alto nível.
+A figura \ref{fig:automacao} mostra um diagrama em blocos de um processo automatizado, contendo os blocos representativos dos níveis 0 a 3 da pirâmide de automação. A instrumentação consiste de sensores e atuadores. As variáveis medidas pelos sensores são denominadas de variáveis controladas, enquanto que os valores de comando dos atuadores são chamados de variáveis manipuladas. Como tais atuadores irão operar é definido pelo controle (nível 1), em função de parâmetros definidos pelo supervisório, (nível 2). Este também monitora estas informações e as repassa ao sistema de gerenciamento no nível 3, que aglutina dados de diversos processos para a tomada de decisões de mais alto nível.
 \begin{figure}[htb]
 	\begin{center}
     \includegraphics[width=0.7\textwidth]{figuras/automacao}
